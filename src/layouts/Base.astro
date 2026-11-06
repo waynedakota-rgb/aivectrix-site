@@ -1,0 +1,97 @@
+---
+import "../styles/global.css";
+import { seo, SITE_URL, EMAIL, LINKEDIN } from "../content/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title = seo.title, description = seo.description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const ogImage = new URL(seo.ogImage, SITE_URL).href;
+
+// Structured data uses only confirmed details. No address, phone, or employers.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}#organization`,
+      name: "AIVectrix",
+      url: SITE_URL,
+      email: EMAIL,
+      logo: new URL("/brand/aivectrix-symbol-dark.svg", SITE_URL).href,
+      description: seo.description,
+      founder: { "@id": `${SITE_URL}#dakota-wayne` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}#dakota-wayne`,
+      name: "Dakota Wayne",
+      jobTitle: "Founder",
+      worksFor: { "@id": `${SITE_URL}#organization` },
+      sameAs: [LINKEDIN],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}#website`,
+      url: SITE_URL,
+      name: "AIVectrix",
+      publisher: { "@id": `${SITE_URL}#organization` },
+    },
+  ],
+};
+---
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.remove("no-js");
+        d.classList.add("js");
+        try {
+          if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("motion-ok");
+        } catch (e) {}
+      })();
+    </script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <meta name="theme-color" content="#0D1011" />
+    <meta name="color-scheme" content="light" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preload" href="/fonts/manrope-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AIVectrix" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={seo.ogImageAlt} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={seo.ogImageAlt} />
+
+    {!noindex && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

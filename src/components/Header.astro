@@ -1,0 +1,249 @@
+---
+import Logo from "./Logo.astro";
+import { nav, CHALLENGE_MAIL } from "../content/site";
+---
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a href="#top" class="site-header__brand" aria-label="AIVectrix, back to top">
+      <Logo tone="light" />
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+        {nav.links.map((l) => (
+          <li><a href={l.href} class="site-nav__link">{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href={CHALLENGE_MAIL} class="site-header__cta">{nav.cta}</a>
+
+    <button
+      type="button"
+      class="menu-toggle"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-menu-toggle
+    >
+      <span class="visually-hidden" data-menu-label>Open menu</span>
+      <span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <nav class="container" aria-label="Mobile">
+      <ul class="mobile-menu__list">
+        {nav.links.map((l) => (
+          <li><a href={l.href} class="mobile-menu__link" data-menu-link>{l.label}</a></li>
+        ))}
+      </ul>
+      <a href={CHALLENGE_MAIL} class="mobile-menu__cta" data-menu-link>
+        {nav.cta}
+        <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M3 10h13M11 4.5 16.5 10 11 15.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    color: var(--ivory);
+    transition:
+      background-color 280ms var(--ease),
+      border-color 280ms var(--ease),
+      backdrop-filter 280ms var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  .site-header.is-open {
+    background: var(--charcoal-deep);
+  }
+  .site-header.is-scrolled,
+  .site-header.is-open {
+    background: rgba(13, 16, 17, 0.92);
+    border-bottom-color: var(--line-dark);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 96px;
+    transition: height 280ms var(--ease);
+  }
+  .site-header.is-scrolled .site-header__inner {
+    height: var(--header-h);
+  }
+  .site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-right: auto;
+    border-radius: 2px;
+  }
+  .site-header__brand :global(.logo) {
+    width: auto;
+    height: 30px;
+  }
+
+  .site-nav__list {
+    display: flex;
+    gap: 4px;
+  }
+  .site-nav__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 14px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-2-on-dark);
+    text-decoration: none;
+    transition: color 200ms var(--ease);
+  }
+  .site-nav__link:hover {
+    color: var(--ivory);
+  }
+  .site-nav__link.is-active {
+    color: var(--ivory);
+    box-shadow: inset 0 -1px 0 var(--copper-light);
+  }
+
+  .site-header__cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 18px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--ivory);
+    text-decoration: none;
+    border: 1px solid rgba(245, 242, 235, 0.36);
+    border-radius: var(--radius);
+    transition:
+      border-color 200ms var(--ease),
+      background-color 200ms var(--ease),
+      color 200ms var(--ease);
+  }
+  .site-header__cta:hover {
+    background: var(--ivory);
+    border-color: var(--ivory);
+    color: var(--charcoal);
+  }
+
+  .menu-toggle {
+    display: none;
+    width: 48px;
+    height: 48px;
+    margin-right: -10px;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    border-radius: var(--radius);
+  }
+  .menu-toggle__bars {
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 12px;
+    margin: auto;
+  }
+  .menu-toggle__bars span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 240ms var(--ease), top 240ms var(--ease);
+  }
+  .menu-toggle__bars span:first-child {
+    top: 0;
+  }
+  .menu-toggle__bars span:last-child {
+    top: 10.5px;
+  }
+  .site-header.is-open .menu-toggle__bars span:first-child {
+    top: 5px;
+    transform: rotate(45deg);
+  }
+  .site-header.is-open .menu-toggle__bars span:last-child {
+    top: 5px;
+    transform: rotate(-45deg);
+  }
+
+  .mobile-menu {
+    background: var(--charcoal-deep);
+    border-top: 1px solid var(--line-dark);
+    height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    padding-block: 24px 40px;
+  }
+  .mobile-menu[hidden] {
+    display: none;
+  }
+  .mobile-menu__list {
+    display: grid;
+  }
+  .mobile-menu__link {
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ivory);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .mobile-menu__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    margin-top: 32px;
+    padding: 16px 20px;
+    font-weight: 600;
+    color: var(--charcoal);
+    background: var(--ivory);
+    text-decoration: none;
+    border-radius: var(--radius);
+  }
+
+  @media (max-width: 960px) {
+    .site-nav,
+    .site-header__cta {
+      display: none;
+    }
+    .menu-toggle {
+      display: inline-flex;
+    }
+    .site-header__inner {
+      height: var(--header-h);
+    }
+  }
+  /* Without JavaScript the menu cannot open, so show the contact link instead. */
+  @media (max-width: 960px) {
+    :global(.no-js) .menu-toggle {
+      display: none;
+    }
+    :global(.no-js) .site-header__cta {
+      display: inline-flex;
+      font-size: 0.875rem;
+      padding: 8px 12px;
+    }
+  }
+  @media (max-width: 400px) {
+    .site-header__inner {
+      gap: 12px;
+    }
+    .site-header__brand :global(.logo) {
+      height: 26px;
+    }
+  }
+</style>

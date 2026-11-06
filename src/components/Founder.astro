@@ -1,0 +1,232 @@
+---
+import Button from "./Button.astro";
+import { founder, LINKEDIN } from "../content/site";
+import { SYMBOL_PATHS } from "./brandPaths";
+---
+<section class="founder section" id="founder" aria-labelledby="founder-title">
+  <div class="container founder__grid">
+    <figure class="founder__portrait" data-reveal>
+      {founder.headshot ? (
+        <img
+          src={founder.headshot}
+          alt={founder.headshotAlt}
+          width="800"
+          height="1000"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <div class="monogram" aria-hidden="true">
+          <svg class="monogram__mark" viewBox="0 0 64 64" focusable="false">
+            <g fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="rgba(245,242,235,.5)" d={SYMBOL_PATHS[0]} />
+              <path stroke="#D9AA85" d={SYMBOL_PATHS[1]} />
+              <path stroke="rgba(245,242,235,.5)" d={SYMBOL_PATHS[2]} />
+            </g>
+          </svg>
+          <span class="monogram__letters">DW</span>
+        </div>
+      )}
+      <figcaption class="founder__caption">
+        <span class="founder__name">{founder.name}</span>
+        <span class="founder__role">{founder.role}</span>
+      </figcaption>
+    </figure>
+
+    <div class="founder__content">
+      <p class="label" data-reveal>Founder</p>
+      <h2 id="founder-title" class="founder__title headline-lines" data-reveal style="--reveal-i:1">
+        {founder.headline.map((l) => <span>{l}</span>)}
+      </h2>
+      <div class="founder__bio">
+        {founder.bio.map((p, i) => <p data-reveal style={`--reveal-i:${i % 3}`}>{p}</p>)}
+      </div>
+
+      <div class="creds" data-reveal>
+        <div class="creds__group">
+          <h3 class="creds__heading">Credentials</h3>
+          <ul class="creds__list">
+            {founder.credentials.map((c) => (
+              <li class="cred"><span class="cred__kind">{c.kind}</span>{c.text}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="creds__group">
+          <h3 class="creds__heading">Expertise</h3>
+          <ul class="creds__list">
+            {founder.expertise.map((c) => (
+              <li class="cred cred--expertise">{c.text}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <blockquote class="founder__statement" data-reveal>
+        <p>“{founder.statement}”</p>
+      </blockquote>
+
+      <div class="founder__link" data-reveal>
+        <Button href={LINKEDIN} variant="text" tone="light" rel="noopener" target="_blank">
+          Dakota Wayne on LinkedIn<span class="visually-hidden"> (opens in a new tab)</span>
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .founder {
+    background: var(--ivory);
+    border-top: 1px solid var(--line-light);
+  }
+  .founder__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 56px clamp(40px, 7vw, 112px);
+    align-items: start;
+  }
+  .founder__portrait {
+    position: sticky;
+    top: calc(var(--header-h) + 40px);
+  }
+  .founder__portrait img,
+  .monogram {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius);
+    background: var(--charcoal);
+  }
+  .monogram {
+    position: relative;
+    display: grid;
+    align-items: end;
+    justify-items: start;
+    padding: 9%;
+    overflow: hidden;
+    background:
+      radial-gradient(80% 60% at 70% 20%, rgba(217, 170, 133, 0.12), transparent 70%),
+      linear-gradient(160deg, var(--charcoal) 0%, var(--charcoal-deep) 100%);
+  }
+  .monogram__mark {
+    position: absolute;
+    width: 64%;
+    right: 8%;
+    top: 10%;
+    opacity: 0.9;
+  }
+  .monogram__letters {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(5rem, 3rem + 8vw, 10rem);
+    letter-spacing: -0.06em;
+    color: var(--ivory);
+    line-height: 1;
+  }
+  .founder__caption {
+    display: grid;
+    gap: 2px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-light);
+  }
+  .founder__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--charcoal);
+  }
+  .founder__role {
+    font-size: var(--step-small);
+    color: var(--text-2);
+  }
+
+  .founder__title {
+    margin-top: 24px;
+    font-size: var(--step-h2);
+    max-width: 16ch;
+  }
+  .founder__bio {
+    display: grid;
+    gap: 20px;
+    margin-top: 36px;
+    max-width: 64ch;
+  }
+
+  .creds {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 24px 40px;
+    margin-top: 48px;
+    padding-block: 28px;
+    border-block: 1px solid var(--line-light);
+  }
+  .creds__heading {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+  .creds__list {
+    display: grid;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .cred {
+    display: grid;
+    gap: 2px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    line-height: 1.3;
+    color: var(--charcoal);
+  }
+  .cred__kind {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--copper-ink);
+  }
+  .cred--expertise {
+    font-weight: 600;
+    padding-left: 14px;
+    border-left: 2px solid var(--copper);
+  }
+
+  .founder__statement {
+    margin-top: 48px;
+  }
+  .founder__statement p {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--charcoal);
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .founder__link {
+    margin-top: 32px;
+  }
+
+  @media (max-width: 960px) {
+    .founder__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .founder__portrait {
+      position: static;
+      max-width: 420px;
+    }
+  }
+  @media (max-width: 560px) {
+    .creds {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

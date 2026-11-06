@@ -1,0 +1,27 @@
+---
+interface Props {
+  label?: string;
+  lines: string | string[];
+  id?: string;
+  class?: string;
+}
+const { label, lines, id, class: className = "" } = Astro.props;
+const list = Array.isArray(lines) ? lines : [lines];
+---
+<div class={`section-heading ${className}`}>
+  {label && <p class="label" data-reveal>{label}</p>}
+  <h2 id={id} class="headline-lines" data-reveal style="--reveal-i:1">
+    {list.map((l) => <span>{l}</span>)}
+  </h2>
+</div>
+
+<style>
+  .section-heading {
+    display: grid;
+    gap: 24px;
+  }
+  h2 {
+    font-size: var(--step-h2);
+    max-width: 22ch;
+  }
+</style>

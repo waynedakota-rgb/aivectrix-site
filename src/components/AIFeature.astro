@@ -1,0 +1,182 @@
+---
+import Button from "./Button.astro";
+import { ai, AI_MAIL } from "../content/site";
+const fragments = [
+  "M40 70c40-30 70 20 110-6",
+  "M70 250c30 20 60-40 96-10",
+  "M180 40c20 40-10 70 30 96",
+  "M210 300c40-18 52 26 92 4",
+  "M300 60c24 30 60 0 84 36",
+  "M330 230c26-36 70-6 92-40",
+  "M430 300c30-10 40 30 80 10",
+  "M460 70c10 40 50 34 60 74",
+];
+---
+<section class="ai section on-dark" id="ai" aria-labelledby="ai-title">
+  <div class="container ai__grid">
+    <div class="ai__copy">
+      <p class="label" data-reveal>{ai.label}</p>
+      <h2 id="ai-title" class="ai__title headline-lines" data-reveal style="--reveal-i:1">
+        {ai.headline.map((l) => <span>{l}</span>)}
+      </h2>
+      <p class="lede ai__body" data-reveal style="--reveal-i:2">{ai.body}</p>
+      <div class="ai__cta" data-reveal style="--reveal-i:3">
+        <Button href={AI_MAIL} tone="dark">{ai.cta}</Button>
+      </div>
+    </div>
+
+    <div class="ai__path">
+      <div class="ai-visual" data-ai-visual aria-hidden="true">
+        <svg viewBox="0 0 560 340" focusable="false">
+          <g class="ai-frags">
+            {fragments.map((d, i) => <path d={d} style={`--i:${i}`} />)}
+          </g>
+          <path class="ai-route-base" d="M24 300C140 300 150 170 280 170S430 40 536 40" />
+          <path class="ai-route" d="M24 300C140 300 150 170 280 170S430 40 536 40" pathLength="1" />
+          <circle class="ai-node" cx="24" cy="300" r="7" />
+          <circle class="ai-node" cx="280" cy="170" r="7" />
+          <circle class="ai-node is-end" cx="536" cy="40" r="7" />
+        </svg>
+      </div>
+      <ol class="ai__steps">
+        {ai.steps.map((s, i) => (
+          <li class="ai-step" data-reveal style={`--reveal-i:${i}`}>
+            <span class="ai-step__num">{String(i + 1).padStart(2, "0")}</span>
+            <span class="ai-step__text">{s}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ai {
+    background:
+      radial-gradient(70% 90% at 100% 0%, rgba(217, 170, 133, 0.06), transparent 60%),
+      var(--charcoal);
+    border-top: 1px solid var(--line-dark);
+  }
+  .ai__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: 64px clamp(40px, 7vw, 112px);
+    align-items: center;
+  }
+  .ai__title {
+    margin-top: 24px;
+    font-size: clamp(2rem, 1.4rem + 2.2vw, 3.25rem);
+  }
+  .ai__title span:last-child {
+    color: var(--copper-light);
+  }
+  .ai__body {
+    margin-top: 28px;
+    max-width: 50ch;
+  }
+  .ai__cta {
+    margin-top: 40px;
+  }
+
+  .ai-visual svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .ai-frags path {
+    fill: none;
+    stroke: rgba(189, 195, 194, 0.4);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+  }
+  .ai-route-base {
+    fill: none;
+    stroke: rgba(245, 242, 235, 0.12);
+    stroke-width: 1;
+    stroke-dasharray: 3 7;
+  }
+  .ai-route {
+    fill: none;
+    stroke: var(--copper-light);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  .ai-node {
+    fill: var(--charcoal);
+    stroke: var(--ivory);
+    stroke-width: 1.5;
+  }
+  .ai-node.is-end {
+    fill: var(--copper-light);
+    stroke: var(--copper-light);
+  }
+
+  /* Static default (no JS, reduced motion): fragments faint, route drawn. */
+  .ai-frags path {
+    opacity: 0.25;
+  }
+
+  /* Motion: fragments start visible, then settle away as the route draws. Runs once. */
+  :global(.motion-ok) .ai-visual .ai-frags path {
+    opacity: 1;
+    transition:
+      opacity 900ms var(--ease) calc(var(--i) * 60ms + 200ms),
+      transform 1200ms var(--ease) calc(var(--i) * 60ms);
+  }
+  :global(.motion-ok) .ai-visual .ai-route {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1600ms var(--ease) 500ms;
+  }
+  :global(.motion-ok) .ai-visual.is-in .ai-frags path {
+    opacity: 0.18;
+    transform: translateY(6px);
+  }
+  :global(.motion-ok) .ai-visual.is-in .ai-route {
+    stroke-dashoffset: 0;
+  }
+
+  .ai__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+    border-top: 1px solid var(--line-dark);
+  }
+  .ai-step {
+    display: grid;
+    gap: 10px;
+    padding-top: 20px;
+  }
+  .ai-step__num {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--copper-light);
+  }
+  .ai-step__text {
+    font-family: var(--font-display);
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ivory);
+  }
+
+  @media (max-width: 960px) {
+    .ai__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .ai__steps {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+    .ai-step {
+      grid-template-columns: 40px 1fr;
+      align-items: baseline;
+      padding-block: 16px;
+      border-bottom: 1px solid var(--line-dark);
+    }
+  }
+</style>

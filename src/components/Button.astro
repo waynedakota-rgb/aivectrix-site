@@ -1,0 +1,95 @@
+---
+interface Props {
+  href: string;
+  variant?: "primary" | "ghost" | "text";
+  tone?: "dark" | "light";
+  class?: string;
+  [key: string]: unknown;
+}
+const { href, variant = "primary", tone = "dark", class: className = "", ...rest } = Astro.props;
+---
+<a href={href} class={`btn btn--${variant} btn--on-${tone} ${className}`} {...rest}>
+  <span class="btn__label"><slot /></span>
+  <svg class="btn__arrow" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false">
+    <path d="M3 10h13M11 4.5 16.5 10 11 15.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 14px 24px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    transition:
+      background-color 200ms var(--ease),
+      color 200ms var(--ease),
+      border-color 200ms var(--ease);
+  }
+  .btn__arrow {
+    flex: none;
+    transition: transform 220ms var(--ease);
+  }
+  .btn:hover .btn__arrow,
+  .btn:focus-visible .btn__arrow {
+    transform: translateX(4px);
+  }
+
+  /* Primary on dark: ivory button, charcoal text (16:1). */
+  .btn--primary.btn--on-dark {
+    background: var(--ivory);
+    color: var(--charcoal);
+  }
+  .btn--primary.btn--on-dark:hover {
+    background: var(--copper-light);
+  }
+  /* Primary on light: charcoal button, ivory text (16:1). */
+  .btn--primary.btn--on-light {
+    background: var(--charcoal);
+    color: var(--ivory);
+  }
+  .btn--primary.btn--on-light:hover {
+    background: #2a2f30;
+  }
+  .btn--primary.btn--on-light:hover .btn__arrow {
+    color: var(--copper-light);
+  }
+
+  .btn--ghost.btn--on-dark {
+    border-color: rgba(245, 242, 235, 0.32);
+    color: var(--ivory);
+  }
+  .btn--ghost.btn--on-dark:hover {
+    border-color: var(--copper-light);
+  }
+
+  .btn--text {
+    padding-inline: 4px;
+    min-height: 44px;
+  }
+  .btn--text.btn--on-dark {
+    color: var(--ivory);
+  }
+  .btn--text.btn--on-light {
+    color: var(--charcoal);
+  }
+  .btn--text .btn__label {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+    padding-bottom: 2px;
+  }
+  .btn--text:hover .btn__label {
+    background-image: linear-gradient(var(--copper-light), var(--copper-light));
+  }
+  .btn--text.btn--on-light:hover .btn__label {
+    background-image: linear-gradient(var(--copper), var(--copper));
+  }
+</style>

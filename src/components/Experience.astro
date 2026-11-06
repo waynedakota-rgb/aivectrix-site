@@ -1,0 +1,62 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import ExperienceEntry from "./ExperienceEntry.astro";
+import { experience } from "../content/site";
+---
+<section class="experience section" id="experience" aria-labelledby="experience-title">
+  <div class="container">
+    <div class="experience__head">
+      <SectionHeading id="experience-title" label={experience.label} lines={experience.headline} />
+      <div class="experience__intro">
+        <p class="lede" data-reveal style="--reveal-i:2">{experience.intro}</p>
+        <p class="experience__note" data-reveal style="--reveal-i:3">{experience.note}</p>
+      </div>
+    </div>
+    <ol class="experience__list">
+      {experience.entries.map((e, i) => (
+        <ExperienceEntry index={i + 1} title={e.title} org={e.org} text={e.text} extra={e.extra} />
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .experience {
+    background: var(--ivory);
+  }
+  .experience__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px clamp(32px, 6vw, 96px);
+    align-items: end;
+  }
+  .experience__intro {
+    display: grid;
+    gap: 20px;
+  }
+  .experience__note {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--step-small);
+    font-weight: 600;
+    color: var(--text-2);
+  }
+  .experience__note::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--copper);
+    flex: none;
+  }
+  .experience__list {
+    margin-top: clamp(56px, 7vw, 96px);
+    border-top: 1px solid var(--charcoal);
+  }
+  @media (max-width: 960px) {
+    .experience__head {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

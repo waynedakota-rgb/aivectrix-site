@@ -1,0 +1,64 @@
+---
+import { invitation } from "../content/site";
+---
+<section class="invitation section" aria-labelledby="invitation-title">
+  <div class="container invitation__grid">
+    <span class="invitation__rule" aria-hidden="true"></span>
+    <h2 id="invitation-title" class="invitation__question" data-reveal>{invitation.headline}</h2>
+    <div class="invitation__aside">
+      <p class="invitation__body" data-reveal style="--reveal-i:1">{invitation.body}</p>
+      <p class="invitation__closing" data-reveal style="--reveal-i:2">{invitation.closing}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .invitation {
+    padding-block: clamp(80px, 13vw, 176px);
+  }
+  .invitation__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 48px;
+  }
+  .invitation__rule {
+    grid-column: 1 / -1;
+    width: 96px;
+    height: 2px;
+    background: var(--copper);
+  }
+  .invitation__question {
+    grid-column: 1 / span 11;
+    font-size: var(--step-question);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    max-width: 22ch;
+  }
+  .invitation__aside {
+    grid-column: 6 / span 6;
+    display: grid;
+    gap: 28px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line-light);
+  }
+  .invitation__body {
+    font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.3125rem);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+  .invitation__closing {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+    line-height: 1.4;
+    color: var(--charcoal);
+    max-width: 40ch;
+  }
+  @media (max-width: 860px) {
+    .invitation__question,
+    .invitation__aside {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

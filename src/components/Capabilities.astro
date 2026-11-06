@@ -1,0 +1,44 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import CapabilityRow from "./CapabilityRow.astro";
+import { capabilities } from "../content/site";
+---
+<section class="capabilities section" id="capabilities" aria-labelledby="capabilities-title">
+  <div class="container capabilities__grid">
+    <div class="capabilities__head">
+      <SectionHeading id="capabilities-title" label={capabilities.label} lines={capabilities.headline} />
+    </div>
+    <ol class="capabilities__list">
+      {capabilities.items.map((item, i) => (
+        <CapabilityRow index={i + 1} title={item.title} text={item.text} />
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .capabilities {
+    background: var(--ivory-deep);
+  }
+  .capabilities__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 48px clamp(32px, 6vw, 96px);
+    align-items: start;
+  }
+  .capabilities__head {
+    position: sticky;
+    top: calc(var(--header-h) + 48px);
+  }
+  .capabilities__list {
+    border-top: 1px solid var(--charcoal);
+  }
+  @media (max-width: 960px) {
+    .capabilities__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .capabilities__head {
+      position: static;
+    }
+  }
+</style>

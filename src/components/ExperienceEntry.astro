@@ -1,0 +1,77 @@
+---
+interface Props {
+  index: number;
+  title: string;
+  org: string;
+  text: string;
+  extra?: string;
+}
+const { index, title, org, text, extra } = Astro.props;
+---
+<li class="xp" data-reveal>
+  <div class="xp__meta">
+    <span class="xp__num" aria-hidden="true">{String(index).padStart(2, "0")}</span>
+    <p class="xp__org"><span class="visually-hidden">Employer: </span>{org}</p>
+  </div>
+  <div class="xp__body">
+    <h3 class="xp__title">{title}</h3>
+    <p class="xp__text">{text}</p>
+    {extra && <p class="xp__extra">{extra}</p>}
+  </div>
+</li>
+
+<style>
+  .xp {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: 24px clamp(32px, 6vw, 96px);
+    padding-block: clamp(36px, 5vw, 56px);
+    border-bottom: 1px solid var(--line-light);
+  }
+  .xp__meta {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+  }
+  .xp__num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    letter-spacing: 0.06em;
+    color: var(--copper-ink);
+  }
+  .xp__org {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+  .xp__title {
+    font-size: clamp(1.5rem, 1.15rem + 1.3vw, 2.375rem);
+    line-height: 1.12;
+    max-width: 24ch;
+  }
+  .xp__text {
+    margin-top: 20px;
+    max-width: 64ch;
+  }
+  .xp__extra {
+    margin-top: 16px;
+    padding-left: 16px;
+    border-left: 2px solid var(--copper);
+    max-width: 62ch;
+    color: var(--text-2);
+  }
+  @media (max-width: 760px) {
+    .xp {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .xp__meta {
+      grid-auto-flow: column;
+      justify-content: start;
+      align-items: baseline;
+      gap: 16px;
+    }
+  }
+</style>

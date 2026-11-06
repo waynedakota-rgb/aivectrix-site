@@ -1,0 +1,184 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import { approach } from "../content/site";
+---
+<section class="approach section" id="approach" aria-labelledby="approach-title">
+  <div class="container">
+    <div class="approach__intro">
+      <SectionHeading id="approach-title" label={approach.label} lines={approach.headline} />
+      <p class="lede approach__body" data-reveal style="--reveal-i:2">{approach.body}</p>
+    </div>
+
+    <div class="pillars" data-reveal style="--reveal-i:1">
+      <svg class="pillars__rail" viewBox="0 0 1000 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <line x1="0" y1="12" x2="1000" y2="12" />
+      </svg>
+      <ol class="pillars__list">
+        {approach.pillars.map((p, i) => (
+          <li class="pillar">
+            <span class="pillar__node" aria-hidden="true"></span>
+            <span class="pillar__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="pillar__name">{p.name}</h3>
+            <p class="pillar__text">{p.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="pillars__whole" aria-hidden="true">
+        <span></span>
+      </div>
+    </div>
+
+    <div class="approach__statement">
+      <p class="approach__quote" data-reveal>{approach.statement}</p>
+      <p class="approach__support" data-reveal style="--reveal-i:1">{approach.statementBody}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .approach {
+    background: var(--ivory);
+    border-top: 1px solid var(--line-light);
+  }
+  .approach__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px clamp(32px, 6vw, 96px);
+    align-items: end;
+  }
+  .approach__body {
+    max-width: 54ch;
+  }
+
+  .pillars {
+    position: relative;
+    margin-top: clamp(56px, 8vw, 104px);
+  }
+  .pillars__rail {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 24px;
+  }
+  .pillars__rail line {
+    stroke: var(--charcoal);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+  .pillars__list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .pillar {
+    position: relative;
+    padding: 56px 28px 40px 0;
+    display: grid;
+    align-content: start;
+    gap: 12px;
+  }
+  .pillar + .pillar {
+    padding-left: 28px;
+    border-left: 1px solid var(--line-light);
+  }
+  .pillar__node {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--ivory);
+    border: 1.5px solid var(--charcoal);
+  }
+  .pillar + .pillar .pillar__node {
+    left: -7px;
+  }
+  .pillar:first-child .pillar__node {
+    background: var(--copper);
+    border-color: var(--copper);
+  }
+  .pillar__num {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--text-2);
+  }
+  .pillar__name {
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem);
+  }
+  .pillar__text {
+    color: var(--text);
+    max-width: 26ch;
+  }
+  .pillars__whole {
+    height: 20px;
+    border: 1px solid var(--charcoal);
+    border-top: 0;
+    border-radius: 0 0 2px 2px;
+    position: relative;
+  }
+  .pillars__whole span {
+    position: absolute;
+    left: 50%;
+    bottom: -32px;
+    width: 1px;
+    height: 32px;
+    background: var(--copper);
+  }
+
+  .approach__statement {
+    margin-top: clamp(80px, 10vw, 128px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+    gap: 24px;
+  }
+  .approach__quote {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--charcoal);
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .approach__support {
+    max-width: 56ch;
+    color: var(--text-2);
+  }
+
+  @media (max-width: 960px) {
+    .approach__intro {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .pillars__rail {
+      display: none;
+    }
+    .pillars__list {
+      grid-template-columns: minmax(0, 1fr);
+      border-left: 1px solid var(--charcoal);
+      margin-left: 7px;
+    }
+    .pillar,
+    .pillar + .pillar {
+      padding: 0 0 40px 32px;
+      border-left: 0;
+    }
+    .pillar__node,
+    .pillar + .pillar .pillar__node {
+      left: -8px;
+      top: 2px;
+    }
+    .pillar__text {
+      max-width: 40ch;
+    }
+    .pillars__whole {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,30 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Invitation from "../components/Invitation.astro";
+import Approach from "../components/Approach.astro";
+import Capabilities from "../components/Capabilities.astro";
+import AIFeature from "../components/AIFeature.astro";
+import Experience from "../components/Experience.astro";
+import Founder from "../components/Founder.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+---
+<Base>
+  <Header />
+  <main id="main" tabindex="-1">
+    <Hero />
+    <Invitation />
+    <Approach />
+    <Capabilities />
+    <AIFeature />
+    <Experience />
+    <Founder />
+    <Contact />
+  </main>
+  <Footer />
+  <script>
+    import "../scripts/main";
+  </script>
+</Base>

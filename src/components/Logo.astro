@@ -1,0 +1,31 @@
+---
+import { SYMBOL_PATHS, WORDMARK_AI, WORDMARK_VECTRIX } from "./brandPaths";
+
+interface Props {
+  /** "light" for dark backgrounds, "dark" for ivory backgrounds. */
+  tone?: "light" | "dark";
+  class?: string;
+}
+const { tone = "light", class: className = "" } = Astro.props;
+const main = tone === "light" ? "#F5F2EB" : "#151819";
+const accent = tone === "light" ? "#D9AA85" : "#B8794F";
+---
+<svg
+  class={`logo ${className}`}
+  viewBox="0 0 226 48"
+  width="151"
+  height="32"
+  role="img"
+  aria-label="AIVectrix"
+  focusable="false"
+>
+  <g transform="scale(.75)" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke={main} d={SYMBOL_PATHS[0]} />
+    <path stroke={accent} d={SYMBOL_PATHS[1]} />
+    <path stroke={main} d={SYMBOL_PATHS[2]} />
+  </g>
+  <g transform="translate(60 38) scale(0.01944)">
+    <path fill={accent} d={WORDMARK_AI} />
+    <path fill={main} d={WORDMARK_VECTRIX} />
+  </g>
+</svg>

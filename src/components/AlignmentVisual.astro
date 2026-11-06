@@ -1,0 +1,134 @@
+---
+import { STRANDS, VIEWBOX, strandPath, labelPos } from "../scripts/alignment";
+// Server-rendered in the resolved (aligned) state. This is what no-JS,
+// reduced-motion, and print visitors see. The client script animates from it.
+const resolved = STRANDS.map((s) => ({ ...s, d: strandPath(s, 1), lp: labelPos(s, 1) }));
+---
+<div class="hero-visual" data-alignment aria-hidden="true">
+  <svg viewBox={VIEWBOX} preserveAspectRatio="xMidYMid meet" focusable="false">
+    <g class="hv-stages">
+      <line x1="424" y1="20" x2="424" y2="664" />
+      <line x1="700" y1="20" x2="700" y2="664" />
+      <line x1="994" y1="20" x2="994" y2="664" />
+      <text x="440" y="692">Complexity</text>
+      <text x="700" y="692" text-anchor="middle">Alignment</text>
+      <text x="994" y="692" text-anchor="end">Results</text>
+    </g>
+    {resolved.map((s) => (
+      <g class={`hv-strand${s.accent ? " is-accent" : ""}`} data-strand={s.id}>
+        <path class="hv-line" d={s.d} pathLength="1" />
+        <path class="hv-pulse" d={s.d} pathLength="1" />
+        <circle class="hv-dot" cx={s.aligned[0][0]} cy={s.aligned[0][1]} r="4" />
+        <text class="hv-label" x={s.lp[0]} y={s.lp[1]}>{s.label}</text>
+      </g>
+    ))}
+  </svg>
+</div>
+
+<style>
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 6 / 7;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-visual svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .hv-stages line {
+    stroke: rgba(245, 242, 235, 0.08);
+    stroke-width: 1;
+    stroke-dasharray: 2 6;
+  }
+  .hv-stages text {
+    font: 600 13px var(--font-body);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    fill: #8e9694;
+  }
+  .hv-line {
+    fill: none;
+    stroke: rgba(189, 195, 194, 0.55);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+  }
+  .is-accent .hv-line {
+    stroke: var(--copper-light);
+    stroke-width: 2;
+  }
+  .hv-pulse {
+    fill: none;
+    stroke: var(--copper-light);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-dasharray: 0.08 1;
+    stroke-dashoffset: 0.08;
+    opacity: 0;
+  }
+  .hv-dot {
+    fill: var(--charcoal-deep);
+    stroke: rgba(189, 195, 194, 0.8);
+    stroke-width: 1.5;
+  }
+  .is-accent .hv-dot {
+    stroke: var(--copper-light);
+  }
+  .hv-label {
+    font: 600 16px var(--font-body);
+    letter-spacing: 0.02em;
+    fill: var(--text-2-on-dark);
+  }
+  .is-accent .hv-label {
+    fill: var(--copper-light);
+  }
+
+  /* When motion is allowed, a single travelling highlight runs once
+     each strand reaches alignment, then stops. */
+  .hero-visual.is-resolved .hv-pulse {
+    animation: hv-pulse 2.4s var(--ease) 1 forwards;
+  }
+  .hero-visual.is-resolved [data-strand="processes"] .hv-pulse { animation-delay: 120ms; }
+  .hero-visual.is-resolved [data-strand="technology"] .hv-pulse { animation-delay: 240ms; }
+  .hero-visual.is-resolved [data-strand="data"] .hv-pulse { animation-delay: 360ms; }
+
+  @keyframes hv-pulse {
+    0% { opacity: 0; stroke-dashoffset: 0.08; }
+    12% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { opacity: 0; stroke-dashoffset: -1; }
+  }
+
+  /* Smaller screens: trim the empty top band of the drawing. */
+  @media (max-width: 1100px) {
+    .hero-visual {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+    }
+    .hero-visual svg {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: auto;
+      aspect-ratio: 6 / 7;
+    }
+  }
+  @media (max-width: 700px) {
+    .hv-label {
+      font-size: 24px;
+    }
+    .hv-stages text {
+      font-size: 20px;
+    }
+  }
+
+  :global(.motion-ok) .hero-visual svg {
+    opacity: 0;
+    transition: opacity 700ms var(--ease);
+  }
+  :global(.motion-ok) .hero-visual.is-ready svg {
+    opacity: 1;
+  }
+</style>

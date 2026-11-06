@@ -1,0 +1,38 @@
+---
+import Base from "../layouts/Base.astro";
+import Logo from "../components/Logo.astro";
+import Button from "../components/Button.astro";
+import { EMAIL } from "../content/site";
+---
+<Base title="Page not found | AIVectrix" noindex>
+  <main id="main" class="nf on-dark">
+    <div class="container nf__inner">
+      <a href="/" aria-label="AIVectrix home"><Logo tone="light" /></a>
+      <h1>This page isn’t here.</h1>
+      <p class="lede">The link may be out of date. Everything about AIVectrix is on the home page, or you can write to <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p>
+      <Button href="/" tone="dark">Go to the home page</Button>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .nf {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    background: var(--charcoal-deep);
+    padding-block: 64px;
+  }
+  .nf__inner {
+    display: grid;
+    gap: 32px;
+    justify-items: start;
+  }
+  h1 {
+    font-size: var(--step-h2);
+  }
+  .lede a {
+    color: var(--ivory);
+    overflow-wrap: anywhere;
+  }
+</style>

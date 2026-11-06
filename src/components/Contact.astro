@@ -1,0 +1,148 @@
+---
+import Button from "./Button.astro";
+import { contact, EMAIL, CHALLENGE_MAIL } from "../content/site";
+---
+<section class="contact section on-dark" id="contact" aria-labelledby="contact-title">
+  <div class="container contact__inner">
+    <svg class="contact__lanes" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+      <path d="M0 520C200 520 260 380 360 300S520 120 600 80" />
+      <path d="M0 548C210 548 280 404 380 324S540 144 600 112" />
+      <path class="is-accent" d="M0 492C190 492 240 356 340 276S500 96 600 48" />
+      <path d="M0 576C220 576 300 428 400 348S560 168 600 144" />
+    </svg>
+    <span class="contact__rule" aria-hidden="true"></span>
+    <h2 id="contact-title" class="contact__title" data-reveal>{contact.headline}</h2>
+    <p class="lede contact__body" data-reveal style="--reveal-i:1">{contact.body}</p>
+
+    <div class="contact__actions" data-reveal style="--reveal-i:2">
+      <Button href={CHALLENGE_MAIL} tone="dark">{contact.cta}</Button>
+    </div>
+
+    <div class="contact__email" data-reveal style="--reveal-i:3">
+      <a class="contact__address" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      <button type="button" class="copy-btn" data-copy-email={EMAIL} hidden>
+        <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><rect x="6.5" y="6.5" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 4.5v-1A1.5 1.5 0 0 0 12 2H4.5A1.5 1.5 0 0 0 3 3.5V11A1.5 1.5 0 0 0 4.5 12.5h1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Copy email address</span>
+      </button>
+      <p class="copy-status" role="status" aria-live="polite" data-copy-status></p>
+    </div>
+
+    <p class="contact__fit" data-reveal>{contact.fit}</p>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: var(--charcoal-deep);
+    padding-block: clamp(96px, 14vw, 192px);
+  }
+  .contact {
+    overflow: hidden;
+  }
+  .contact__inner {
+    position: relative;
+    display: grid;
+    justify-items: start;
+  }
+  .contact__inner > :not(.contact__lanes) {
+    position: relative;
+  }
+  .contact__lanes {
+    position: absolute;
+    right: calc(var(--gutter) * -1);
+    top: 50%;
+    width: min(46%, 600px);
+    transform: translateY(-40%);
+    pointer-events: none;
+  }
+  .contact__lanes path {
+    fill: none;
+    stroke: rgba(189, 195, 194, 0.22);
+    stroke-width: 1.2;
+  }
+  .contact__lanes path.is-accent {
+    stroke: rgba(217, 170, 133, 0.7);
+  }
+  @media (max-width: 1100px) {
+    .contact__lanes {
+      display: none;
+    }
+  }
+  .contact__rule {
+    width: 96px;
+    height: 2px;
+    background: var(--copper-light);
+  }
+  .contact__title {
+    margin-top: 40px;
+    font-size: clamp(2.75rem, 1.4rem + 6vw, 7rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+  .contact__body {
+    margin-top: 32px;
+    font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.3125rem);
+    max-width: 52ch;
+  }
+  .contact__actions {
+    margin-top: 48px;
+  }
+  .contact__email {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line-dark);
+    width: 100%;
+    max-width: 760px;
+  }
+  .contact__address {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.125rem, 0.9rem + 1.2vw, 1.75rem);
+    color: var(--ivory);
+    text-decoration: underline;
+    text-decoration-color: rgba(217, 170, 133, 0.6);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+    overflow-wrap: anywhere;
+    user-select: all;
+  }
+  .contact__address:hover {
+    text-decoration-color: var(--copper-light);
+  }
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 14px;
+    font: 600 0.875rem/1 var(--font-body);
+    color: var(--text-2-on-dark);
+    background: transparent;
+    border: 1px solid rgba(245, 242, 235, 0.28);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: color 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .copy-btn:hover {
+    color: var(--ivory);
+    border-color: var(--copper-light);
+  }
+  .copy-btn[hidden] {
+    display: none;
+  }
+  .copy-status {
+    flex-basis: 100%;
+    min-height: 1.5em;
+    font-size: var(--step-small);
+    color: var(--copper-light);
+  }
+  .contact__fit {
+    margin-top: 16px;
+    color: var(--text-2-on-dark);
+    max-width: 52ch;
+  }
+</style>
