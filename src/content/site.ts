@@ -164,7 +164,7 @@ export const founder = {
    * (square or 4:5 portrait, at least 800px wide), then set `headshot` to
    * "/images/dakota-wayne.webp". Leave it null to show the monogram panel.
    */
-  headshot: null as string | null,
+  headshot: "/images/dakota-wayne.webp" as string | null,
   headshotAlt: "Portrait of Dakota Wayne, founder of AIVectrix",
 };
 

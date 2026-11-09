@@ -14,7 +14,7 @@ Keep the factual boundaries noted at the top of that file: founder experience is
 2. In `src/content/site.ts`, set `headshot: "/images/dakota-wayne.webp"`.
 3. Commit and push.
 
-Until then the Founder section shows a designed "DW" monogram panel. Nothing looks broken.
+The headshot is in place (lapel pin retouched out so no employer branding shows). If `headshot` is set to `null`, the section falls back to a designed "DW" monogram panel.
 
 ## Local development
 

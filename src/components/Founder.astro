@@ -10,8 +10,8 @@ import { SYMBOL_PATHS } from "./brandPaths";
         <img
           src={founder.headshot}
           alt={founder.headshotAlt}
-          width="800"
-          height="1000"
+          width="1040"
+          height="1300"
           loading="lazy"
           decoding="async"
         />
@@ -92,8 +92,10 @@ import { SYMBOL_PATHS } from "./brandPaths";
   .founder__portrait img,
   .monogram {
     width: 100%;
+    height: auto;
     aspect-ratio: 4 / 5;
     object-fit: cover;
+    object-position: 50% 20%;
     border-radius: var(--radius);
     background: var(--charcoal);
   }
