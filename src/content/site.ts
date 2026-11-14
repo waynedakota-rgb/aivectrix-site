@@ -81,7 +81,7 @@ export const hero = {
     { value: "15+", label: "years in operations and engineering" },
     { value: "MBA", label: "Operational Excellence" },
     { value: "Black Belt", label: "Lean Six Sigma" },
-    { value: "10+", label: "facilities reached by systems I built" },
+    { value: "10+", label: "facilities in a replication model I created" },
   ],
 };
 
@@ -244,7 +244,7 @@ export const faq: { label: string; headline: string; items: Faq[] } = {
       a: "No. My hands-on background is manufacturing operations and engineering, but Lean, structured problem solving, and leadership development apply wherever work repeats and people lead it. If your challenge is outside what I do well, I’ll say so and point you to someone better suited.",
     },
     {
-      q: "How do we get started?",
+      q: "How do I get started?",
       a: "Email me the challenge, what you’ve already tried, and what a good outcome would look like. I’ll reply with whether I can help and what a first step could be.",
     },
     // PLACEHOLDER: { q: "How much does it cost?", a: "<your pricing approach, e.g. fixed-fee assessment, then a scoped project>" },
@@ -295,7 +295,7 @@ export const services: Service[] = [
       },
       {
         title: "Structured problem solving",
-        text: "A shared method your team can use without me, so the next problem gets solved faster.",
+        text: "A shared method your team can use without me, so the next problem doesn’t wait for me.",
       },
       {
         title: "Daily management and Hoshin Kanri",
@@ -305,7 +305,7 @@ export const services: Service[] = [
     steps: ["Understand the work as it really runs.", "Find the few causes that matter most.", "Build the routines that keep the gain."],
     evidence: [
       "Developed structured problem-solving and throughput improvement methodologies and facilitated improvement workshops.",
-      "Delivered Lean and Hoshin Kanri training and built daily management frameworks.",
+      "Experience includes Lean and Hoshin Kanri training and daily management frameworks.",
       "Created models for replicating effective systems across 10+ facilities.",
     ],
     faq: [
@@ -333,7 +333,7 @@ export const services: Service[] = [
     eyebrow: "AI strategy consulting",
     h1: "Practical AI strategy consulting for business leaders",
     answer:
-      "AIVectrix helps business owners and leaders figure out where AI is worth using and where it isn’t. The work starts with the business problem, finds the opportunities that support your people and workflows, and shapes a practical path from idea to working solution.",
+      "AIVectrix helps business owners and leaders figure out where AI is worth using and where it isn’t. The work starts with the business problem, finds the opportunities that support your people and workflows, and shapes a practical path forward, including solutions built around real business needs.",
     covers: [
       {
         title: "Opportunity assessment",
