@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 import Button from "../components/Button.astro";
 import SubpageHero from "../components/SubpageHero.astro";
 import Contact from "../components/Contact.astro";
-import { apps, prayerfold, PRAYERFOLD_MAIL } from "../content/site";
+import { apps, prayerfold, PRAYERFOLD_MAIL, mailto } from "../content/site";
 import { webPage, breadcrumbs, ORG_ID, abs } from "../lib/schema";
 
 const path = "/apps/";
@@ -18,17 +18,48 @@ const appNode = {
   operatingSystem: "Android",
   publisher: { "@id": ORG_ID },
 };
-const schema = [webPage(path, apps.title, apps.description), appNode, breadcrumbs(path, "Apps")];
+const service = {
+  "@type": "Service",
+  "@id": `${abs(path)}#service`,
+  name: "Custom app development",
+  description: apps.answer,
+  provider: { "@id": ORG_ID },
+};
+const schema = [webPage(path, apps.title, apps.description), service, appNode, breadcrumbs(path, "Apps")];
 ---
 <Base title={apps.title} description={apps.description} schema={schema}>
   <Header />
   <main id="main" tabindex="-1">
-    <SubpageHero eyebrow={apps.eyebrow} title={apps.h1} answer={apps.answer} crumb="Apps" />
+    <SubpageHero eyebrow={apps.eyebrow} title={apps.h1} answer={apps.answer} crumb="Apps">
+      <div class="app-cta">
+        <Button href={mailto(apps.mail)} tone="dark">Tell me what you need built</Button>
+      </div>
+    </SubpageHero>
+
+    <section class="section app-how" aria-labelledby="how-title">
+      <div class="container app__grid">
+        <div class="app__head">
+          <p class="label">How I build</p>
+          <h2 id="how-title" class="app__name">The same discipline, applied to software.</h2>
+        </div>
+        <ol class="app-how__list">
+          {apps.how.map((h, i) => (
+            <li>
+              <span class="app-how__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{h.title}</h3>
+                <p>{h.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
 
     <section class="section app" id="prayerfold" aria-labelledby="prayerfold-title">
       <div class="container app__grid">
         <div class="app__head">
-          <p class="label">{prayerfold.status}</p>
+          <p class="label">My own app · {prayerfold.status}</p>
           <h2 id="prayerfold-title" class="app__name">{prayerfold.name}</h2>
           <p class="app__tagline">{prayerfold.tagline}</p>
         </div>
@@ -84,6 +115,38 @@ const schema = [webPage(path, apps.title, apps.description), appNode, breadcrumb
 </Base>
 
 <style>
+  .app-cta {
+    margin-top: 40px;
+  }
+  .app-how {
+    background: var(--ivory-deep);
+  }
+  .app-how__list {
+    border-top: 1px solid var(--charcoal);
+  }
+  .app-how__list li {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 16px;
+    padding: 28px 0 30px;
+    border-bottom: 1px solid var(--line-light);
+  }
+  .app-how__num {
+    padding-top: 4px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--copper-ink);
+  }
+  .app-how__list h3 {
+    font-size: var(--step-h3);
+    line-height: 1.2;
+  }
+  .app-how__list p {
+    margin-top: 10px;
+    max-width: 58ch;
+  }
   .app__grid {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -180,6 +243,12 @@ const schema = [webPage(path, apps.title, apps.description), appNode, breadcrumb
     .app__grid,
     .app-join__inner {
       grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .app-how__list li {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
     }
   }
   @media (max-width: 640px) {

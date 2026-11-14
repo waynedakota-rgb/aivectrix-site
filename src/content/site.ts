@@ -140,7 +140,7 @@ export const capabilities = {
     },
     {
       title: "Custom App Development",
-      text: "Design and build custom apps shaped to a real problem and the people who use them. My own app, Prayerfold, is in beta today.",
+      text: "Design and build custom mobile and web apps around how your people actually work, from a written spec to testing with real users. My own app, Prayerfold, is in beta today.",
       href: "/apps/",
     },
   ],
@@ -368,13 +368,32 @@ export const footer = {
  * storage, say "invite only", no daily-verse claim, no address.
  */
 export const apps = {
-  title: "Apps by Vectrix | Prayerfold",
+  title: "Custom App Development for Business Leaders | Vectrix",
   description:
-    "Apps built by Vectrix LLC. Prayerfold is a Christ-focused prayer app, now in a small private beta on Android.",
-  eyebrow: "Apps",
-  h1: "Apps I’ve built",
+    "Custom mobile and web app development by Vectrix for business owners and leaders in North America. Spec first, built for real use, tested with real users. See Prayerfold, my own app.",
+  eyebrow: "Custom app development",
+  h1: "Custom app development",
   answer:
-    "Vectrix builds software as well as advising on it. When I talk about solutions built around real needs, this is what I mean: start with a real problem, then build the simplest thing that solves it.",
+    "I design and build custom mobile and web apps for business owners and leaders who need a tool that fits how their people actually work. Every build starts the way my consulting does: understand the work first, then build the simplest thing that solves the real problem.",
+  how: [
+    {
+      title: "Spec before code",
+      text: "Every screen, flow and decision gets written down and agreed before any code. Prayerfold’s spec covers 44 screens and 22 flows, plus a list of what’s out of scope so it stays out.",
+    },
+    {
+      title: "Built for real use",
+      text: "Sign-in, offline use with sync, reminders, groups with roles and admin approval: the parts that decide whether people keep using an app after the first week.",
+    },
+    {
+      title: "Privacy and safety planned on paper",
+      text: "Who can see what, how reports get handled, and what the app collects are decided before launch, not patched in after.",
+    },
+    {
+      title: "Tested with real people",
+      text: "Launch waits on real-world use. Prayerfold is in a private beta with real users before it goes anywhere near the stores.",
+    },
+  ],
+  mail: "Custom app conversation",
 };
 
 export const prayerfold = {
