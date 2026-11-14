@@ -1,15 +1,15 @@
 /**
- * AIVectrix website content.
+ * Vectrix website content.
  *
  * Edit the words on the site here. Layout and animation code live in
  * src/components and src/scripts, so you can change copy without touching them.
  *
  * Factual boundaries (keep these when editing):
  * - Experience entries are from the founder's employment history. They are NOT
- *   AIVectrix client projects. Never call these employers clients or partners.
+ *   Vectrix client projects. Never call these employers clients or partners.
  * - The founder's current employer stays anonymous everywhere.
  * - No invented metrics, testimonials, or guaranteed outcomes.
- * - AIVectrix is one person today (Dakota). Write in the first person ("I"),
+ * - Vectrix is one person today (Dakota). Write in the first person ("I"),
  *   never "we", until the team actually grows.
  * - Buyer: business owners, entrepreneurs, and leaders driving change,
  *   anywhere in North America.
@@ -31,15 +31,15 @@ export function mailto(subject?: string, body?: string): string {
 }
 
 export const CHALLENGE_MAIL = mailto(
-  "A business challenge for AIVectrix",
+  "A business challenge for Vectrix",
   "Here’s the challenge we’re facing:\n\n\nWhat we’ve tried:\n\n\nWhat a successful outcome would look like:\n\n",
 );
 
 export const AI_MAIL = mailto("AI strategy conversation");
 
-/** One plain sentence that says what AIVectrix is. Reused in meta, schema and llms.txt. */
+/** One plain sentence that says what Vectrix is. Reused in meta, schema and llms.txt. */
 export const DEFINITION =
-  "AIVectrix is a business consulting practice for owners, entrepreneurs, and leaders across North America who need to drive change. Founder Dakota Wayne brings 15+ years in manufacturing operations, engineering, and operational excellence to strategy, Lean and Six Sigma, leadership development, and practical AI.";
+  "Vectrix is a business consulting practice for owners, entrepreneurs, and leaders across North America who need to drive change. Founder Dakota Wayne brings 15+ years in manufacturing operations, engineering, and operational excellence to strategy, Lean and Six Sigma, leadership development, and practical AI.";
 
 export const AREA_SERVED = "North America";
 
@@ -52,12 +52,12 @@ export const AREA_SERVED = "North America";
 export const CF_ANALYTICS_TOKEN: string | null = "a8ae1d193e3845cab75981d1de9bd404";
 
 export const seo = {
-  title: "AIVectrix | Business Consulting for Leaders Driving Change",
+  title: "Vectrix | Business Consulting for Leaders Driving Change",
   description:
     "Consulting for business owners, entrepreneurs, and leaders across North America: strategy and execution, operational excellence, leadership development, and practical AI.",
   ogImage: "/og-image.png",
   ogImageAlt:
-    "AIVectrix logo on deep charcoal with the line: Complex challenges. Meaningful results.",
+    "Vectrix logo on deep charcoal with the line: Complex challenges. Meaningful results.",
 };
 
 export const nav = {
@@ -152,8 +152,8 @@ export const experience = {
   label: "Experience behind the approach",
   headline: ["Built through", "hands-on leadership."],
   intro:
-    "AIVectrix draws on Dakota Wayne’s experience across manufacturing operations, engineering, operational excellence, leadership development, and enterprise transformation.",
-  note: "Selected work from the founder’s professional career. These are employers, not AIVectrix clients.",
+    "Vectrix draws on Dakota Wayne’s experience across manufacturing operations, engineering, operational excellence, leadership development, and enterprise transformation.",
+  note: "Selected work from the founder’s professional career. These are employers, not Vectrix clients.",
   entries: [
     {
       title: "Enterprise transformation and leadership systems",
@@ -177,7 +177,7 @@ export const experience = {
 
 export const founder = {
   name: "Dakota Wayne",
-  role: "Founder, AIVectrix",
+  role: "Founder, Vectrix",
   headline: ["Practical experience.", "People at the center."],
   bio: [
     "Dakota Wayne brings 15+ years of experience across manufacturing operations, engineering, operational excellence, and enterprise transformation.",
@@ -209,7 +209,7 @@ export const founder = {
    * "/images/dakota-wayne.webp". Leave it null to show the monogram panel.
    */
   headshot: "/images/dakota-wayne.webp" as string | null,
-  headshotAlt: "Portrait of Dakota Wayne, founder of AIVectrix",
+  headshotAlt: "Portrait of Dakota Wayne, founder of Vectrix",
 };
 
 export const contact = {
@@ -226,14 +226,14 @@ export const faq: { label: string; headline: string; items: Faq[] } = {
   label: "Questions",
   headline: "What leaders ask first.",
   items: [
-    { q: "What is AIVectrix?", a: DEFINITION },
+    { q: "What is Vectrix?", a: DEFINITION },
     {
-      q: "Who does AIVectrix work with?",
+      q: "Who does Vectrix work with?",
       a: "Business owners, entrepreneurs, and leaders anywhere in North America who are trying to drive a change: a strategy that hasn’t turned into action, a problem that keeps coming back, or an AI opportunity they don’t know how to start.",
     },
     {
-      q: "Is AIVectrix a firm or one person?",
-      a: "Right now AIVectrix is one person: me, Dakota Wayne. You work directly with me. I plan to grow the team over time.",
+      q: "Is Vectrix a firm or one person?",
+      a: "Right now Vectrix is one person: me, Dakota Wayne. You work directly with me. I plan to grow the team over time.",
     },
     {
       q: "What does an engagement cover?",
@@ -273,13 +273,13 @@ export const services: Service[] = [
   {
     slug: "operational-excellence-consulting",
     nav: "Operational excellence",
-    title: "Operational Excellence & Lean Six Sigma Consulting | AIVectrix",
+    title: "Operational Excellence & Lean Six Sigma Consulting | Vectrix",
     description:
       "Operational excellence consulting for business owners and leaders in North America: Lean, Six Sigma, structured problem solving, and strategy turned into daily execution.",
     eyebrow: "Operational excellence consulting",
     h1: "Operational excellence and Lean Six Sigma consulting",
     answer:
-      "AIVectrix helps business owners and leaders reduce waste and variation, solve problems that keep coming back, and turn strategy into daily execution. The work uses Lean, Six Sigma, structured problem solving, and Hoshin Kanri, led by a Lean Six Sigma Black Belt with an MBA in Operational Excellence.",
+      "Vectrix helps business owners and leaders reduce waste and variation, solve problems that keep coming back, and turn strategy into daily execution. The work uses Lean, Six Sigma, structured problem solving, and Hoshin Kanri, led by a Lean Six Sigma Black Belt with an MBA in Operational Excellence.",
     covers: [
       {
         title: "Strategy into execution",
@@ -311,7 +311,7 @@ export const services: Service[] = [
     faq: [
       {
         q: "What is operational excellence consulting?",
-        a: "It’s outside help to make how your business runs more reliable: less waste, less variation, faster problem solving, and a strategy that turns into daily action. AIVectrix does this with Lean, Six Sigma, and structured problem solving.",
+        a: "It’s outside help to make how your business runs more reliable: less waste, less variation, faster problem solving, and a strategy that turns into daily action. Vectrix does this with Lean, Six Sigma, and structured problem solving.",
       },
       {
         q: "Do I need a Lean Six Sigma program already?",
@@ -327,13 +327,13 @@ export const services: Service[] = [
   {
     slug: "ai-strategy-consulting",
     nav: "AI strategy",
-    title: "AI Strategy Consulting for Business Leaders | AIVectrix",
+    title: "AI Strategy Consulting for Business Leaders | Vectrix",
     description:
       "Practical AI strategy consulting for business owners and leaders in North America. Start with the business problem, find the AI opportunities worth pursuing, and build a path forward.",
     eyebrow: "AI strategy consulting",
     h1: "Practical AI strategy consulting for business leaders",
     answer:
-      "AIVectrix helps business owners and leaders figure out where AI is worth using and where it isn’t. The work starts with the business problem, finds the opportunities that support your people and workflows, and shapes a practical path forward, including solutions built around real business needs.",
+      "Vectrix helps business owners and leaders figure out where AI is worth using and where it isn’t. The work starts with the business problem, finds the opportunities that support your people and workflows, and shapes a practical path forward, including solutions built around real business needs.",
     covers: [
       {
         title: "Opportunity assessment",
@@ -377,13 +377,13 @@ export const services: Service[] = [
   {
     slug: "leadership-development-training",
     nav: "Leadership & training",
-    title: "Leadership Development & Training Design Consulting | AIVectrix",
+    title: "Leadership Development & Training Design Consulting | Vectrix",
     description:
       "Leadership development and training curriculum design for business owners and leaders in North America: coaching, ownership, playbooks, and repeatable learning systems.",
     eyebrow: "Leadership development and training",
     h1: "Leadership development and training curriculum design",
     answer:
-      "AIVectrix helps business owners and leaders build managers who coach, teams that take ownership, and training that turns hard-won knowledge into repeatable learning. The work covers leadership development, structured coaching, and course, playbook, and curriculum design.",
+      "Vectrix helps business owners and leaders build managers who coach, teams that take ownership, and training that turns hard-won knowledge into repeatable learning. The work covers leadership development, structured coaching, and course, playbook, and curriculum design.",
     covers: [
       {
         title: "Leaders who coach",

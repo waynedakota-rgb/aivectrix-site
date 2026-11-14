@@ -6,11 +6,11 @@ import { SITE_URL, DEFINITION, EMAIL, LINKEDIN, services, faq, founder, AREA_SER
 export const GET: APIRoute = () => {
   const abs = (p: string) => new URL(p, SITE_URL).href;
   const lines = [
-    "# AIVectrix",
+    "# Vectrix",
     "",
     `> ${DEFINITION}`,
     "",
-    `AIVectrix serves business owners, entrepreneurs, and leaders in ${AREA_SERVED}. It is currently a one-person practice run by founder ${founder.name}. Credentials: ${founder.credentials.map((c) => c.text).join("; ")}. Contact: ${EMAIL}.`,
+    `Vectrix serves business owners, entrepreneurs, and leaders in ${AREA_SERVED}. It is currently a one-person practice run by founder ${founder.name}. Credentials: ${founder.credentials.map((c) => c.text).join("; ")}. Contact: ${EMAIL}.`,
     "",
     "## Services",
     "",
@@ -18,7 +18,7 @@ export const GET: APIRoute = () => {
     "",
     "## About",
     "",
-    `- [About Dakota Wayne](${abs("/about/")}): background, credentials, and employment history (employers are not AIVectrix clients).`,
+    `- [About Dakota Wayne](${abs("/about/")}): background, credentials, and employment history (employers are not Vectrix clients).`,
     `- [Dakota Wayne on LinkedIn](${LINKEDIN})`,
     "",
     "## Frequently asked questions",

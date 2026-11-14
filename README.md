@@ -1,12 +1,12 @@
-# AIVectrix website
+# Vectrix website
 
-Site for **AIVectrix** at https://aivectrix.com. Static Astro build, hosted on GitHub Pages.
+Site for **Vectrix** at https://aivectrix.com. Static Astro build, hosted on GitHub Pages.
 
 ## Editing the words
 
 All copy lives in `src/content/site.ts`. Change text there, commit, and the site redeploys. You don't need to touch layout or animation code.
 
-Keep the factual boundaries noted at the top of that file: founder experience is employment history, not client work. The current employer stays anonymous. The site speaks in the first person ("I") because AIVectrix is one person today.
+Keep the factual boundaries noted at the top of that file: founder experience is employment history, not client work. The current employer stays anonymous. The site speaks in the first person ("I") because Vectrix is one person today.
 
 Pages:
 
