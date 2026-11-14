@@ -15,7 +15,8 @@ export function baseGraph() {
     {
       "@type": "Organization",
       "@id": ORG_ID,
-      name: "AIVectrix",
+      name: "Vectrix",
+      alternateName: "AIVectrix",
       url: SITE_URL,
       email: EMAIL,
       logo: abs("/brand/aivectrix-symbol-dark.svg"),
@@ -60,7 +61,7 @@ export function baseGraph() {
       "@type": "WebSite",
       "@id": WEBSITE_ID,
       url: SITE_URL,
-      name: "AIVectrix",
+      name: "Vectrix",
       publisher: { "@id": ORG_ID },
       inLanguage: "en-US",
     },

@@ -1,5 +1,5 @@
 /**
- * Client behavior for the AIVectrix page. Everything here is progressive
+ * Client behavior for the Vectrix page. Everything here is progressive
  * enhancement: the page is complete and readable without it.
  */
 import { STRANDS, strandPath, labelPos } from "./alignment";
