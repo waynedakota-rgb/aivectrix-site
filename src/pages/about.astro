@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import SubpageHero from "../components/SubpageHero.astro";
+import Founder from "../components/Founder.astro";
+import Experience from "../components/Experience.astro";
+import Contact from "../components/Contact.astro";
+import { webPage, breadcrumbs, PERSON_ID } from "../lib/schema";
+
+const path = "/about/";
+const title = "About Dakota Wayne, Founder of AIVectrix | AIVectrix";
+const description =
+  "Dakota Wayne, founder of AIVectrix, brings 15+ years in manufacturing operations, engineering, and operational excellence. MBA in Operational Excellence, Lean Six Sigma Black Belt.";
+const page = { ...webPage(path, title, description, "AboutPage"), mainEntity: { "@id": PERSON_ID } };
+const schema = [page, breadcrumbs(path, "About")];
+---
+<Base title={title} description={description} schema={schema}>
+  <Header />
+  <main id="main" tabindex="-1">
+    <SubpageHero
+      eyebrow="About AIVectrix"
+      title="Dakota Wayne, founder of AIVectrix"
+      answer="AIVectrix is me, Dakota Wayne. I spent 15+ years in manufacturing operations, engineering, and operational excellence, building systems, training, and leadership capability. I hold an MBA in Operational Excellence and a Lean Six Sigma Black Belt, and I work with business owners, entrepreneurs, and leaders across North America."
+      crumb="About"
+    />
+    <Founder />
+    <Experience />
+    <Contact />
+  </main>
+  <Footer />
+  <script>
+    import "../scripts/main";
+  </script>
+</Base>

@@ -10,7 +10,7 @@ import { capabilities } from "../content/site";
     </div>
     <ol class="capabilities__list">
       {capabilities.items.map((item, i) => (
-        <CapabilityRow index={i + 1} title={item.title} text={item.text} />
+        <CapabilityRow index={i + 1} title={item.title} text={item.text} href={item.href} />
       ))}
     </ol>
   </div>
