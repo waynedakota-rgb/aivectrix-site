@@ -49,7 +49,7 @@ export const AREA_SERVED = "North America";
  * site > "Manage site" (the token value inside the JS snippet).
  * null = analytics off. Setting it also updates the CSP and privacy page.
  */
-export const CF_ANALYTICS_TOKEN: string | null = null;
+export const CF_ANALYTICS_TOKEN: string | null = "a8ae1d193e3845cab75981d1de9bd404";
 
 export const seo = {
   title: "AIVectrix | Business Consulting for Leaders Driving Change",
