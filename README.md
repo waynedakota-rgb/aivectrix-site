@@ -97,7 +97,7 @@ Remove any old A, AAAA, ALIAS or "parking" records on `@` first. Optionally veri
 - `public/brand/aivectrix-symbol-*.svg`, `aivectrix-wordmark-*.svg`: separate pieces.
 - `public/favicon.svg`: symbol on a charcoal tile.
 
-The wordmark is outlined from Manrope Bold (SIL Open Font License 1.1). The "AI" is set in copper so it can't be misread as "Al". This is an original mark; no trademark search or registration has been done.
+The wordmark is outlined from Manrope Bold (SIL Open Font License 1.1). The wordmark reads "Vectrix" (renamed from AIVectrix in November 2026); the copper accent now lives in the middle stroke of the symbol. This is an original mark; no trademark search or registration has been done.
 
 To re-render the PNGs after a brand change: `node tools/render-assets.cjs` (needs Playwright and Chromium installed locally). Then re-create `favicon.ico` from a 32 px PNG.
 

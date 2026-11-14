@@ -1,5 +1,5 @@
 ---
-import { SYMBOL_PATHS, WORDMARK_AI, WORDMARK_VECTRIX } from "./brandPaths";
+import { SYMBOL_PATHS, WORDMARK_VECTRIX } from "./brandPaths";
 
 interface Props {
   /** "light" for dark backgrounds, "dark" for ivory backgrounds. */
@@ -12,8 +12,8 @@ const accent = tone === "light" ? "#D9AA85" : "#B8794F";
 ---
 <svg
   class={`logo ${className}`}
-  viewBox="0 0 226 48"
-  width="151"
+  viewBox="0 0 190 48"
+  width="127"
   height="32"
   role="img"
   aria-label="Vectrix"
@@ -24,8 +24,7 @@ const accent = tone === "light" ? "#D9AA85" : "#B8794F";
     <path stroke={accent} d={SYMBOL_PATHS[1]} />
     <path stroke={main} d={SYMBOL_PATHS[2]} />
   </g>
-  <g transform="translate(60 38) scale(0.01944)">
-    <path fill={accent} d={WORDMARK_AI} />
+  <g transform="translate(60 38) scale(0.01944) translate(-1812 0)">
     <path fill={main} d={WORDMARK_VECTRIX} />
   </g>
 </svg>
