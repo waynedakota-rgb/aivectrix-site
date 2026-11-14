@@ -43,6 +43,14 @@ export const DEFINITION =
 
 export const AREA_SERVED = "North America";
 
+/**
+ * Cloudflare Web Analytics site token (cookieless, no consent banner needed).
+ * Find it in Cloudflare dashboard > Analytics & Logs > Web Analytics > your
+ * site > "Manage site" (the token value inside the JS snippet).
+ * null = analytics off. Setting it also updates the CSP and privacy page.
+ */
+export const CF_ANALYTICS_TOKEN: string | null = null;
+
 export const seo = {
   title: "AIVectrix | Business Consulting for Leaders Driving Change",
   description:

@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { seo, SITE_URL } from "../content/site";
+import { seo, SITE_URL, CF_ANALYTICS_TOKEN } from "../content/site";
 import { baseGraph } from "../lib/schema";
 
 interface Props {
@@ -32,11 +32,11 @@ const inlineHash = btoa(String.fromCharCode(...new Uint8Array(digest)));
  */
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'sha256-${inlineHash}'`,
+  `script-src 'self' 'sha256-${inlineHash}'${CF_ANALYTICS_TOKEN ? " https://static.cloudflareinsights.com" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self'",
-  "connect-src 'self'",
+  `connect-src 'self'${CF_ANALYTICS_TOKEN ? " https://cloudflareinsights.com" : ""}`,
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'none'",
@@ -86,5 +86,13 @@ const csp = [
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <slot />
+    {CF_ANALYTICS_TOKEN && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={JSON.stringify({ token: CF_ANALYTICS_TOKEN })}
+      ></script>
+    )}
   </body>
 </html>
