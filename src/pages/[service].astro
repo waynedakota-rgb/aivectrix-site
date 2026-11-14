@@ -4,10 +4,9 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Button from "../components/Button.astro";
 import SubpageHero from "../components/SubpageHero.astro";
-import Faq from "../components/Faq.astro";
 import Contact from "../components/Contact.astro";
 import { services, mailto, type Service } from "../content/site";
-import { webPage, faqPage, breadcrumbs, serviceNode } from "../lib/schema";
+import { webPage, breadcrumbs, serviceNode } from "../lib/schema";
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { service: s.slug }, props: { s } }));
@@ -18,7 +17,6 @@ const related = services.filter((o) => o.slug !== s.slug);
 const schema = [
   webPage(path, s.title, s.description),
   serviceNode(s.slug, s.h1, s.answer),
-  faqPage(path, s.faq),
   breadcrumbs(path, s.nav),
 ];
 ---
@@ -77,8 +75,6 @@ const schema = [
         </div>
       </div>
     </section>
-
-    <Faq items={s.faq} label="Questions" headline="Common questions" tone="deep" />
 
     <section class="section svc-related" aria-labelledby="related-title">
       <div class="container">

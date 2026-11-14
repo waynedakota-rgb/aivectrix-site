@@ -10,10 +10,9 @@ import Experience from "../components/Experience.astro";
 import Founder from "../components/Founder.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
-import Faq from "../components/Faq.astro";
-import { faq, seo } from "../content/site";
-import { webPage, faqPage } from "../lib/schema";
-const schema = [webPage("/", seo.title, seo.description), faqPage("/", faq.items)];
+import { seo } from "../content/site";
+import { webPage } from "../lib/schema";
+const schema = [webPage("/", seo.title, seo.description)];
 ---
 <Base schema={schema}>
   <Header />
@@ -25,7 +24,6 @@ const schema = [webPage("/", seo.title, seo.description), faqPage("/", faq.items
     <AIFeature />
     <Experience />
     <Founder />
-    <Faq items={faq.items} label={faq.label} headline={faq.headline} />
     <Contact />
   </main>
   <Footer />

@@ -2,7 +2,7 @@
  * JSON-LD helpers. Only confirmed facts: no address, phone, prices, reviews,
  * or client names. See the factual boundaries in src/content/site.ts.
  */
-import { SITE_URL, EMAIL, LINKEDIN, DEFINITION, AREA_SERVED, founder, services, type Faq } from "../content/site";
+import { SITE_URL, EMAIL, LINKEDIN, DEFINITION, AREA_SERVED, founder, services } from "../content/site";
 
 export const ORG_ID = `${SITE_URL}#organization`;
 export const PERSON_ID = `${SITE_URL}#dakota-wayne`;
@@ -78,18 +78,6 @@ export function webPage(path: string, name: string, description: string, type = 
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": ORG_ID },
     inLanguage: "en-US",
-  };
-}
-
-export function faqPage(path: string, items: Faq[]) {
-  return {
-    "@type": "FAQPage",
-    "@id": `${abs(path)}#faq`,
-    mainEntity: items.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
   };
 }
 

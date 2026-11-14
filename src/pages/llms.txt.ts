@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { SITE_URL, DEFINITION, EMAIL, LINKEDIN, services, faq, founder, AREA_SERVED } from "../content/site";
+import { SITE_URL, DEFINITION, EMAIL, LINKEDIN, services, founder, AREA_SERVED } from "../content/site";
 
 // llms.txt (https://llmstxt.org): a plain-text summary for AI assistants.
 // Built from the same content as the pages, so it can't drift.
@@ -21,9 +21,6 @@ export const GET: APIRoute = () => {
     `- [About Dakota Wayne](${abs("/about/")}): background, credentials, and employment history (employers are not Vectrix clients).`,
     `- [Dakota Wayne on LinkedIn](${LINKEDIN})`,
     "",
-    "## Frequently asked questions",
-    "",
-    ...faq.items.flatMap((f) => [`### ${f.q}`, "", f.a, ""]),
     "## Optional",
     "",
     `- [Home](${SITE_URL})`,

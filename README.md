@@ -10,7 +10,7 @@ Keep the factual boundaries noted at the top of that file: founder experience is
 
 Pages:
 
-- `/` home, with a FAQ section
+- `/` home
 - `/operational-excellence-consulting/`, `/ai-strategy-consulting/`, `/leadership-development-training/`: one page per service, generated from `services` in `site.ts` by `src/pages/[service].astro`
 - `/about/`
 - A draft privacy page lives on the `privacy-draft` branch, on hold until Dakota reviews it
