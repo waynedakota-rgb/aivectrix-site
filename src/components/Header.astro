@@ -1,6 +1,8 @@
 ---
 import Logo from "./Logo.astro";
 import { nav, CHALLENGE_MAIL } from "../content/site";
+const here = Astro.url.pathname;
+const current = (href: string) => (href === here ? "page" : undefined);
 ---
 <header class="site-header" data-header>
   <div class="container site-header__inner">
@@ -11,7 +13,7 @@ import { nav, CHALLENGE_MAIL } from "../content/site";
     <nav class="site-nav" aria-label="Primary">
       <ul class="site-nav__list">
         {nav.links.map((l) => (
-          <li><a href={l.href} class="site-nav__link">{l.label}</a></li>
+          <li><a href={l.href} class="site-nav__link" aria-current={current(l.href)}>{l.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -34,7 +36,7 @@ import { nav, CHALLENGE_MAIL } from "../content/site";
     <nav class="container" aria-label="Mobile">
       <ul class="mobile-menu__list">
         {nav.links.map((l) => (
-          <li><a href={l.href} class="mobile-menu__link" data-menu-link>{l.label}</a></li>
+          <li><a href={l.href} class="mobile-menu__link" data-menu-link aria-current={current(l.href)}>{l.label}</a></li>
         ))}
       </ul>
       <a href={CHALLENGE_MAIL} class="mobile-menu__cta" data-menu-link>
@@ -107,7 +109,8 @@ import { nav, CHALLENGE_MAIL } from "../content/site";
   .site-nav__link:hover {
     color: var(--ivory);
   }
-  .site-nav__link.is-active {
+  .site-nav__link.is-active,
+  .site-nav__link[aria-current="page"] {
     color: var(--ivory);
     box-shadow: inset 0 -1px 0 var(--copper-light);
   }

@@ -25,7 +25,12 @@ export function baseGraph() {
       knowsAbout: founder.knowsAbout,
       makesOffer: services.map((s) => ({
         "@type": "Offer",
-        itemOffered: { "@id": `${abs(`/${s.slug}/`)}#service` },
+        itemOffered: {
+          "@type": "Service",
+          "@id": `${abs(`/${s.slug}/`)}#service`,
+          name: s.h1,
+          url: abs(`/${s.slug}/`),
+        },
       })),
     },
     {
