@@ -7,7 +7,7 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
-  /** Extra JSON-LD nodes for this page (WebPage, FAQPage, Service, ...). */
+  /** Extra JSON-LD nodes for this page (WebPage, Service, ...). */
   schema?: Record<string, unknown>[];
 }
 const { title = seo.title, description = seo.description, noindex = false, schema = [] } = Astro.props;

@@ -1,6 +1,6 @@
 ---
 import Logo from "./Logo.astro";
-import { footer, EMAIL, LINKEDIN, services } from "../content/site";
+import { footer, EMAIL, LINKEDIN, LINKEDIN_COMPANY, services } from "../content/site";
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer on-dark">
@@ -17,6 +17,7 @@ const year = new Date().getFullYear();
     </nav>
     <ul class="site-footer__links">
       <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+      <li><a href={LINKEDIN_COMPANY} rel="noopener" target="_blank">Vectrix on LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
       <li><a href={LINKEDIN} rel="noopener" target="_blank">Founder on LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
     </ul>
     <p class="site-footer__legal">© <span data-year>{year}</span> Vectrix</p>

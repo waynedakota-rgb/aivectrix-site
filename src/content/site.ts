@@ -20,6 +20,7 @@
 
 export const EMAIL = "customerservice@aivectrix.com";
 export const LINKEDIN = "https://www.linkedin.com/in/dakota-wayne-183944b5/";
+export const LINKEDIN_COMPANY = "https://www.linkedin.com/company/vectrixllc/";
 export const SITE_URL = "https://aivectrix.com/";
 
 /** Builds a properly encoded mailto link. */
@@ -66,7 +67,6 @@ export const nav = {
     { href: "/#capabilities", label: "Services" },
     { href: "/#experience", label: "Experience" },
     { href: "/about/", label: "About" },
-    { href: "/#faq", label: "FAQ" },
   ],
   cta: "Tell me your challenge",
 };
@@ -182,6 +182,7 @@ export const founder = {
   bio: [
     "Dakota Wayne brings 15+ years of experience across manufacturing operations, engineering, operational excellence, and enterprise transformation.",
     "His work spans strategy, leadership development, training architecture, AI, Industry 4.0, industrial automation, robotics, and digital manufacturing technologies.",
+    "His methods apply wherever work repeats and people lead it, not only in manufacturing.",
     "He focuses on developing high-performing teams, challenging conventional thinking, and turning complex challenges into sustainable results.",
     "Beyond his professional work, Dakota is passionate about entrepreneurship, leadership development, and building sustainable economic opportunities in developing regions around the world.",
   ],
@@ -216,41 +217,7 @@ export const contact = {
   headline: "Bring me the problem.",
   body: "Tell me what your team is facing, what you’ve already tried, and what a better outcome would look like.",
   cta: "Tell me your challenge",
-  fit: "If I’m not the right fit, I’ll recommend someone better suited to help.",
-};
-
-export type Faq = { q: string; a: string };
-
-/** Home page questions. Answers use only facts stated on this site. */
-export const faq: { label: string; headline: string; items: Faq[] } = {
-  label: "Questions",
-  headline: "What leaders ask first.",
-  items: [
-    { q: "What is Vectrix?", a: DEFINITION },
-    {
-      q: "Who does Vectrix work with?",
-      a: "Business owners, entrepreneurs, and leaders anywhere in North America who are trying to drive a change: a strategy that hasn’t turned into action, a problem that keeps coming back, or an AI opportunity they don’t know how to start.",
-    },
-    {
-      q: "Is Vectrix a firm or one person?",
-      a: "Right now Vectrix is one person: me, Dakota Wayne. You work directly with me. I plan to grow the team over time.",
-    },
-    {
-      q: "What does an engagement cover?",
-      a: "Five areas: strategy and execution, operational excellence (Lean and Six Sigma), leadership and team development, training and curriculum design, and AI strategy. Most real problems touch more than one, which is why I look at people, processes, technology, and data together.",
-    },
-    {
-      q: "Do I need to be a manufacturer?",
-      a: "No. My hands-on background is manufacturing operations and engineering, but Lean, structured problem solving, and leadership development apply wherever work repeats and people lead it. If your challenge is outside what I do well, I’ll say so and point you to someone better suited.",
-    },
-    {
-      q: "How do I get started?",
-      a: "Email me the challenge, what you’ve already tried, and what a good outcome would look like. I’ll reply with whether I can help and what a first step could be.",
-    },
-    // PLACEHOLDER: { q: "How much does it cost?", a: "<your pricing approach, e.g. fixed-fee assessment, then a scoped project>" },
-    // PLACEHOLDER: { q: "Do you work remotely or on site?", a: "<your answer>" },
-    // PLACEHOLDER: { q: "How long does a typical engagement last?", a: "<your answer>" },
-  ],
+  fit: "You work directly with me. If I’m not the right fit, I’ll recommend someone better suited to help.",
 };
 
 export type Service = {
@@ -264,7 +231,6 @@ export type Service = {
   covers: { title: string; text: string }[];
   steps: string[];
   evidence: string[];
-  faq: Faq[];
   mail: string;
 };
 
@@ -308,20 +274,6 @@ export const services: Service[] = [
       "Experience includes Lean and Hoshin Kanri training and daily management frameworks.",
       "Created models for replicating effective systems across 10+ facilities.",
     ],
-    faq: [
-      {
-        q: "What is operational excellence consulting?",
-        a: "It’s outside help to make how your business runs more reliable: less waste, less variation, faster problem solving, and a strategy that turns into daily action. Vectrix does this with Lean, Six Sigma, and structured problem solving.",
-      },
-      {
-        q: "Do I need a Lean Six Sigma program already?",
-        a: "No. Some leaders start from zero, others have a program that stalled. The starting point is the business problem, not the toolkit.",
-      },
-      {
-        q: "Will my team be able to keep it going?",
-        a: "That’s the goal. The work includes training, playbooks, and leader routines so the method stays after the engagement ends.",
-      },
-    ],
     mail: "Operational excellence conversation",
   },
   {
@@ -358,20 +310,6 @@ export const services: Service[] = [
       "Developed learning systems and playbooks for automation and operational excellence.",
       "Background spans AI, industrial automation, robotics, and digital manufacturing technologies.",
     ],
-    faq: [
-      {
-        q: "Where should a business start with AI?",
-        a: "With the business problem, not the tool. Understand the work first, identify where AI could help, then build a practical path. Skipping the first step is how AI projects end up as demos nobody uses.",
-      },
-      {
-        q: "Do I need a data science team?",
-        a: "Not to start. The first step is understanding your work and your data well enough to know what’s possible. Staffing decisions come after you know what you’re building.",
-      },
-      {
-        q: "Is AI right for every problem?",
-        a: "No. Some problems are better solved with a clearer process or better training. Part of the work is telling you when AI isn’t the answer.",
-      },
-    ],
     mail: "AI strategy conversation",
   },
   {
@@ -407,20 +345,6 @@ export const services: Service[] = [
       "Built global standards, frameworks, and training systems across engineering teams.",
       "Developed learning systems and playbooks for automation and operational excellence.",
       "Experience includes structured coaching, daily management, and leadership accountability.",
-    ],
-    faq: [
-      {
-        q: "What does leadership development consulting include?",
-        a: "Building the coaching, ownership, and accountability habits your leaders need, then backing them with routines and training so the change lasts.",
-      },
-      {
-        q: "Can you build our training content?",
-        a: "Yes. Training and curriculum design is a core service: courses, playbooks, training materials, and the system that keeps them current.",
-      },
-      {
-        q: "Is this for new or experienced leaders?",
-        a: "Both. The starting point is what your leaders are struggling with now, not a fixed program.",
-      },
     ],
     mail: "Leadership development conversation",
   },
