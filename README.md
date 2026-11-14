@@ -1,12 +1,21 @@
 # AIVectrix website
 
-Single-page site for **AIVectrix** at https://aivectrix.com. Static Astro build, hosted on GitHub Pages.
+Site for **AIVectrix** at https://aivectrix.com. Static Astro build, hosted on GitHub Pages.
 
 ## Editing the words
 
 All copy lives in `src/content/site.ts`. Change text there, commit, and the site redeploys. You don't need to touch layout or animation code.
 
-Keep the factual boundaries noted at the top of that file: founder experience is employment history, not client work. The current employer stays anonymous.
+Keep the factual boundaries noted at the top of that file: founder experience is employment history, not client work. The current employer stays anonymous. The site speaks in the first person ("I") because AIVectrix is one person today.
+
+Pages:
+
+- `/` home, with a FAQ section
+- `/operational-excellence-consulting/`, `/ai-strategy-consulting/`, `/leadership-development-training/`: one page per service, generated from `services` in `site.ts` by `src/pages/[service].astro`
+- `/about/`, `/privacy/` (the privacy page is a draft; review before relying on it)
+- `/sitemap.xml` and `/llms.txt` are generated at build time from the same content, so they stay in sync
+
+Commented-out `PLACEHOLDER` entries in `site.ts` mark facts only Dakota can supply (pricing approach, remote vs on site, engagement length).
 
 ## Adding the founder headshot
 
@@ -99,6 +108,21 @@ Tokens live in `src/styles/global.css`. Measured contrast (WCAG relative luminan
 - Secondary `#BDC3C2` on charcoal: 10.0:1. Light copper `#D9AA85` on charcoal: 8.5:1.
 - Copper `#B8794F` on ivory is 3.2:1, so it's used only for rules, dots and large display text.
 - Small copper-toned labels on ivory use a derived "copper ink" `#8B5A3A` (5.2:1).
+
+## Security headers
+
+GitHub Pages can't send custom response headers, so the site carries a Content-Security-Policy and Referrer-Policy as `<meta>` tags (`src/layouts/Base.astro`). HSTS, `X-Content-Type-Options`, `Permissions-Policy` and `frame-ancestors` only work as real headers. To get them, serve the site from a host that supports a headers file (Cloudflare Pages, Netlify, Vercel) or put Cloudflare's proxy in front of GitHub Pages, then set:
+
+```
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+X-Frame-Options: DENY
+Content-Security-Policy: <same as the meta tag>; frame-ancestors 'none'
+```
+
+Moving hosts means changing DNS, so it's a deliberate decision, not part of a routine deploy.
 
 ## Privacy
 

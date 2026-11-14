@@ -15,7 +15,14 @@ import { hero, CHALLENGE_MAIL } from "../content/site";
         <Button href={CHALLENGE_MAIL} tone="dark">{hero.cta}</Button>
         <Button href={hero.secondary.href} variant="text" tone="dark">{hero.secondary.label}</Button>
       </div>
-      <p class="hero__note">{hero.note}</p>
+      <dl class="hero__proof">
+        {hero.proof.map((p) => (
+          <div class="proof">
+            <dt class="proof__value">{p.value}</dt>
+            <dd class="proof__label">{p.label}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
     <div class="hero__visual">
       <AlignmentVisual />
@@ -78,13 +85,39 @@ import { hero, CHALLENGE_MAIL } from "../content/site";
     gap: 16px 28px;
     margin-top: 40px;
   }
-  .hero__note {
-    margin-top: 40px;
-    padding-top: 20px;
+  .hero__proof {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, auto));
+    justify-content: start;
+    gap: 16px 28px;
+    margin: 40px 0 0;
+    padding-top: 24px;
     border-top: 1px solid var(--line-dark);
-    max-width: 52ch;
+    max-width: 640px;
+  }
+  .proof {
+    display: grid;
+    gap: 4px;
+  }
+  .proof__value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ivory);
+  }
+  .proof__label {
+    margin: 0;
     font-size: var(--step-small);
+    line-height: 1.4;
     color: var(--text-2-on-dark);
+    max-width: 16ch;
+  }
+  @media (max-width: 720px) {
+    .hero__proof {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
   /* Desktop: the visual sits to the right, partly behind the headline,
      faded on its left edge so the text always wins. */

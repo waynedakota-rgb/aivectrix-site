@@ -1,64 +1,56 @@
 ---
 import "../styles/global.css";
-import { seo, SITE_URL, EMAIL, LINKEDIN } from "../content/site";
+import { seo, SITE_URL } from "../content/site";
+import { baseGraph } from "../lib/schema";
 
 interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  /** Extra JSON-LD nodes for this page (WebPage, FAQPage, Service, ...). */
+  schema?: Record<string, unknown>[];
 }
-const { title = seo.title, description = seo.description, noindex = false } = Astro.props;
+const { title = seo.title, description = seo.description, noindex = false, schema = [] } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 const ogImage = new URL(seo.ogImage, SITE_URL).href;
 
-// Structured data uses only confirmed details. No address, phone, or employers.
 const jsonLd = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${SITE_URL}#organization`,
-      name: "AIVectrix",
-      url: SITE_URL,
-      email: EMAIL,
-      logo: new URL("/brand/aivectrix-symbol-dark.svg", SITE_URL).href,
-      description: seo.description,
-      founder: { "@id": `${SITE_URL}#dakota-wayne` },
-    },
-    {
-      "@type": "Person",
-      "@id": `${SITE_URL}#dakota-wayne`,
-      name: "Dakota Wayne",
-      jobTitle: "Founder",
-      image: new URL("/images/dakota-wayne.webp", SITE_URL).href,
-      worksFor: { "@id": `${SITE_URL}#organization` },
-      sameAs: [LINKEDIN],
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${SITE_URL}#website`,
-      url: SITE_URL,
-      name: "AIVectrix",
-      publisher: { "@id": `${SITE_URL}#organization` },
-    },
-  ],
+  "@graph": [...baseGraph(), ...schema],
 };
+
+// Runs before paint: swaps no-js for js and flags whether motion is allowed.
+const inlineScript = `(function(){var d=document.documentElement;d.classList.remove("no-js");d.classList.add("js");try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("motion-ok")}catch(e){}})();`;
+const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(inlineScript));
+const inlineHash = btoa(String.fromCharCode(...new Uint8Array(digest)));
+
+/*
+ * Content Security Policy as a <meta> tag, because GitHub Pages can't send
+ * response headers. frame-ancestors, HSTS and the other headers need a host
+ * that supports them (see README, "Security headers").
+ * The inline script's hash is computed at build time, so editing it is safe.
+ */
+const csp = [
+  "default-src 'self'",
+  `script-src 'self' 'sha256-${inlineHash}'`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data:",
+  "font-src 'self'",
+  "connect-src 'self'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
 ---
 <!doctype html>
 <html lang="en" class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>
-      (function () {
-        var d = document.documentElement;
-        d.classList.remove("no-js");
-        d.classList.add("js");
-        try {
-          if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.add("motion-ok");
-        } catch (e) {}
-      })();
-    </script>
+    <meta http-equiv="Content-Security-Policy" content={csp} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <script is:inline set:html={inlineScript} />
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}

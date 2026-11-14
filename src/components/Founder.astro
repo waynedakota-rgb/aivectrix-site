@@ -9,6 +9,8 @@ import { SYMBOL_PATHS } from "./brandPaths";
       {founder.headshot ? (
         <img
           src={founder.headshot}
+          srcset={`${founder.headshot.replace(".webp", "-560.webp")} 560w, ${founder.headshot} 1040w`}
+          sizes="(max-width: 960px) min(420px, 100vw), 40vw"
           alt={founder.headshotAlt}
           width="1040"
           height="1300"

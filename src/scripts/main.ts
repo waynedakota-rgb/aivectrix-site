@@ -30,7 +30,10 @@ function initHeader() {
   update();
 
   // Highlight the nav link for the section in view.
-  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>(".site-nav__link"));
+  // Only same-page section links (e.g. "/#approach" on the home page) take part.
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>(".site-nav__link")).filter(
+    (a) => a.hash && a.pathname === window.location.pathname,
+  );
   const sections = links
     .map((a) => document.querySelector<HTMLElement>(a.hash))
     .filter((s): s is HTMLElement => !!s);

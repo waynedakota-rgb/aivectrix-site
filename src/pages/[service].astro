@@ -1,0 +1,230 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Button from "../components/Button.astro";
+import SubpageHero from "../components/SubpageHero.astro";
+import Faq from "../components/Faq.astro";
+import Contact from "../components/Contact.astro";
+import { services, mailto, type Service } from "../content/site";
+import { webPage, faqPage, breadcrumbs, serviceNode } from "../lib/schema";
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { service: s.slug }, props: { s } }));
+}
+const { s } = Astro.props as { s: Service };
+const path = `/${s.slug}/`;
+const related = services.filter((o) => o.slug !== s.slug);
+const schema = [
+  webPage(path, s.title, s.description),
+  serviceNode(s.slug, s.h1, s.answer),
+  faqPage(path, s.faq),
+  breadcrumbs(path, s.nav),
+];
+---
+<Base title={s.title} description={s.description} schema={schema}>
+  <Header />
+  <main id="main" tabindex="-1">
+    <SubpageHero eyebrow={s.eyebrow} title={s.h1} answer={s.answer} crumb={s.nav}>
+      <div class="svc-cta">
+        <Button href={mailto(s.mail)} tone="dark">Tell me your challenge</Button>
+      </div>
+    </SubpageHero>
+
+    <section class="section svc-covers" aria-labelledby="covers-title">
+      <div class="container svc-grid">
+        <div class="svc-head">
+          <p class="label">What it covers</p>
+          <h2 id="covers-title">Where I focus</h2>
+        </div>
+        <ol class="svc-list">
+          {s.covers.map((c, i) => (
+            <li class="svc-item">
+              <span class="svc-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section on-dark svc-steps" aria-labelledby="steps-title">
+      <div class="container">
+        <p class="label">How it works</p>
+        <h2 id="steps-title">Three steps, in this order.</h2>
+        <ol class="steps">
+          {s.steps.map((step, i) => (
+            <li><span class="steps__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>{step}</li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section svc-evidence" aria-labelledby="evidence-title">
+      <div class="container svc-grid">
+        <div class="svc-head">
+          <p class="label">Experience behind it</p>
+          <h2 id="evidence-title">Done before, inside real operations.</h2>
+        </div>
+        <div>
+          <ul class="evidence">
+            {s.evidence.map((e) => <li>{e}</li>)}
+          </ul>
+          <p class="evidence__note">From Dakota Wayne’s employment history, not AIVectrix client work. <a href="/about/">More about Dakota</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <Faq items={s.faq} label="Questions" headline="Common questions" tone="deep" />
+
+    <section class="section svc-related" aria-labelledby="related-title">
+      <div class="container">
+        <h2 id="related-title" class="related__title">Related services</h2>
+        <ul class="related">
+          {related.map((o) => (
+            <li><a href={`/${o.slug}/`}>{o.h1}</a></li>
+          ))}
+          <li><a href="/#capabilities">All services</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <Contact />
+  </main>
+  <Footer />
+  <script>
+    import "../scripts/main";
+  </script>
+</Base>
+
+<style>
+  .svc-cta {
+    margin-top: 40px;
+  }
+  .svc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 48px clamp(32px, 6vw, 96px);
+    align-items: start;
+  }
+  .svc-head {
+    display: grid;
+    gap: 24px;
+  }
+  .svc-head h2,
+  .svc-steps h2 {
+    font-size: var(--step-h2);
+    max-width: 16ch;
+  }
+  .svc-list {
+    border-top: 1px solid var(--charcoal);
+  }
+  .svc-item {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 16px;
+    padding: 28px 0 30px;
+    border-bottom: 1px solid var(--line-light);
+  }
+  .svc-num,
+  .steps__num {
+    padding-top: 4px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--copper-ink);
+  }
+  .svc-item h3 {
+    font-size: var(--step-h3);
+    line-height: 1.2;
+  }
+  .svc-item p {
+    margin-top: 10px;
+    max-width: 58ch;
+  }
+  .svc-steps h2 {
+    margin-top: 24px;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .steps li {
+    display: grid;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line-dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-h3);
+    line-height: 1.25;
+    color: var(--ivory);
+  }
+  .steps__num {
+    color: var(--copper-light);
+  }
+  .evidence {
+    display: grid;
+    gap: 18px;
+    border-top: 1px solid var(--charcoal);
+    padding-top: 28px;
+  }
+  .evidence li {
+    padding-left: 18px;
+    border-left: 2px solid var(--copper);
+    max-width: 60ch;
+  }
+  .evidence__note {
+    margin-top: 28px;
+    font-size: var(--step-small);
+    color: var(--text-2);
+  }
+  .evidence__note a {
+    color: var(--charcoal);
+    text-underline-offset: 4px;
+  }
+  .svc-related {
+    padding-block: clamp(48px, 7vw, 88px);
+    border-top: 1px solid var(--line-light);
+  }
+  .related__title {
+    font-size: var(--step-h3);
+  }
+  .related {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 32px;
+    margin-top: 20px;
+  }
+  .related a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+    color: var(--charcoal);
+    text-underline-offset: 5px;
+    text-decoration-color: var(--copper);
+  }
+  @media (max-width: 960px) {
+    .svc-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 720px) {
+    .steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .svc-item {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+    }
+  }
+</style>

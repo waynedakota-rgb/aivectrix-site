@@ -3,13 +3,14 @@ interface Props {
   index: number;
   title: string;
   text: string;
+  href?: string;
 }
-const { index, title, text } = Astro.props;
+const { index, title, text, href } = Astro.props;
 ---
 <li class="cap" data-reveal style={`--reveal-i:${index % 3}`}>
   <span class="cap__num" aria-hidden="true">{String(index).padStart(2, "0")}</span>
   <div class="cap__body">
-    <h3 class="cap__title">{title}</h3>
+    <h3 class="cap__title">{href ? <a href={href} class="cap__link">{title}</a> : title}</h3>
     <p class="cap__text">{text}</p>
   </div>
 </li>
@@ -53,6 +54,16 @@ const { index, title, text } = Astro.props;
   }
   .cap:hover .cap__title {
     transform: translateX(6px);
+  }
+  .cap__link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--line-light);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+  }
+  .cap__link:hover {
+    text-decoration-color: var(--copper);
   }
   .cap__text {
     margin-top: 12px;

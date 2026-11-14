@@ -1,0 +1,70 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  answer: string;
+  crumb: string;
+}
+const { eyebrow, title, answer, crumb } = Astro.props;
+---
+<section class="sub-hero on-dark" aria-labelledby="page-title">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">{crumb}</li>
+      </ol>
+    </nav>
+    <p class="sub-hero__eyebrow">{eyebrow}</p>
+    <h1 id="page-title" class="sub-hero__title">{title}</h1>
+    <p class="sub-hero__answer">{answer}</p>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .sub-hero {
+    background:
+      radial-gradient(120% 80% at 85% 20%, rgba(185, 121, 79, 0.07), transparent 60%),
+      linear-gradient(180deg, var(--charcoal-deep) 0%, var(--charcoal) 100%);
+    padding-top: calc(96px + clamp(32px, 6vh, 72px));
+    padding-bottom: clamp(56px, 8vw, 104px);
+  }
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: var(--step-small);
+    color: var(--text-2-on-dark);
+  }
+  .crumbs li + li::before {
+    content: "/";
+    margin-right: 8px;
+    color: var(--line-dark);
+  }
+  .crumbs a {
+    color: var(--ivory);
+    text-underline-offset: 4px;
+  }
+  .sub-hero__eyebrow {
+    margin-top: 40px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--copper-light);
+  }
+  .sub-hero__title {
+    margin-top: 20px;
+    font-size: clamp(2.25rem, 1.3rem + 3.6vw, 4.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    max-width: 18ch;
+  }
+  .sub-hero__answer {
+    margin-top: 28px;
+    max-width: 62ch;
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+    color: var(--text-2-on-dark);
+  }
+</style>
