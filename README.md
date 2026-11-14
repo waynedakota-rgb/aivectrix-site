@@ -12,7 +12,8 @@ Pages:
 
 - `/` home, with a FAQ section
 - `/operational-excellence-consulting/`, `/ai-strategy-consulting/`, `/leadership-development-training/`: one page per service, generated from `services` in `site.ts` by `src/pages/[service].astro`
-- `/about/`, `/privacy/` (the privacy page is a draft; review before relying on it)
+- `/about/`
+- A draft privacy page lives on the `privacy-draft` branch, on hold until Dakota reviews it
 - `/sitemap.xml` and `/llms.txt` are generated at build time from the same content, so they stay in sync
 
 Commented-out `PLACEHOLDER` entries in `site.ts` mark facts only Dakota can supply (pricing approach, remote vs on site, engagement length).
@@ -126,4 +127,4 @@ Moving hosts means changing DNS, so it's a deliberate decision, not part of a ro
 
 ## Privacy
 
-No analytics, cookies, trackers, forms, or third-party embeds. Contact is a plain `mailto:` link.
+Cloudflare Web Analytics (cookieless; token in `CF_ANALYTICS_TOKEN` in `site.ts`). No cookies, advertising trackers, forms, or third-party embeds. Contact is a plain `mailto:` link.

@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { SITE_URL, services } from "../content/site";
 
 // Generated at build time so new pages and lastmod stay current without a plugin.
-const paths = ["/", ...services.map((s) => `/${s.slug}/`), "/about/", "/privacy/"];
+const paths = ["/", ...services.map((s) => `/${s.slug}/`), "/about/"];
 
 export const GET: APIRoute = () => {
   const lastmod = new Date().toISOString().slice(0, 10);

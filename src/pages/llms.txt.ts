@@ -27,7 +27,6 @@ export const GET: APIRoute = () => {
     "## Optional",
     "",
     `- [Home](${SITE_URL})`,
-    `- [Privacy](${abs("/privacy/")})`,
     "",
   ];
   return new Response(lines.join("\n"), { headers: { "Content-Type": "text/plain; charset=utf-8" } });
