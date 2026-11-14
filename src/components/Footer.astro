@@ -12,6 +12,7 @@ const year = new Date().getFullYear();
     <nav class="site-footer__nav" aria-label="Footer">
       <ul>
         {services.map((s) => <li><a href={`/${s.slug}/`}>{s.nav}</a></li>)}
+        <li><a href="/apps/">Apps</a></li>
         <li><a href="/about/">About Dakota</a></li>
       </ul>
     </nav>

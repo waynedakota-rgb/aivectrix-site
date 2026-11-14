@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { SITE_URL, DEFINITION, EMAIL, LINKEDIN, LINKEDIN_COMPANY, services, founder, AREA_SERVED } from "../content/site";
+import { SITE_URL, DEFINITION, EMAIL, LINKEDIN, LINKEDIN_COMPANY, services, founder, AREA_SERVED, prayerfold } from "../content/site";
 
 // llms.txt (https://llmstxt.org): a plain-text summary for AI assistants.
 // Built from the same content as the pages, so it can't drift.
@@ -15,6 +15,10 @@ export const GET: APIRoute = () => {
     "## Services",
     "",
     ...services.map((s) => `- [${s.h1}](${abs(`/${s.slug}/`)}): ${s.description}`),
+    "",
+    "## Apps",
+    "",
+    `- [Prayerfold](${abs("/apps/")}): ${prayerfold.description} Status: a small private beta on Android. Publisher: Vectrix LLC.`,
     "",
     "## About",
     "",

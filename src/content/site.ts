@@ -55,7 +55,7 @@ export const CF_ANALYTICS_TOKEN: string | null = "a8ae1d193e3845cab75981d1de9bd4
 export const seo = {
   title: "Vectrix | Business Consulting for Leaders Driving Change",
   description:
-    "Consulting for business owners, entrepreneurs, and leaders across North America: strategy and execution, operational excellence, leadership development, and practical AI.",
+    "Consulting for business owners, entrepreneurs, and leaders across North America: strategy and execution, operational excellence, leadership development, practical AI, and custom app development.",
   ogImage: "/og-image.png",
   ogImageAlt:
     "Vectrix logo on deep charcoal with the line: Complex challenges. Meaningful results.",
@@ -66,6 +66,7 @@ export const nav = {
     { href: "/#approach", label: "Approach" },
     { href: "/#capabilities", label: "Services" },
     { href: "/#experience", label: "Experience" },
+    { href: "/apps/", label: "Apps" },
     { href: "/about/", label: "About" },
   ],
   cta: "Tell me your challenge",
@@ -74,7 +75,7 @@ export const nav = {
 export const hero = {
   eyebrow: "Business consulting across North America",
   headline: ["Consulting for leaders", "making change stick."],
-  body: "I work with business owners, entrepreneurs, and leaders to fix how work gets done, build people who own the results, and put AI to work where it solves a real problem.",
+  body: "I work with business owners, entrepreneurs, and leaders to fix how work gets done, build people who own the results, put AI to work where it solves a real problem, and build custom apps when off-the-shelf tools don’t fit.",
   cta: "Tell me your biggest challenge",
   secondary: { href: "/#capabilities", label: "See how I help" },
   proof: [
@@ -136,6 +137,11 @@ export const capabilities = {
       title: "AI Strategy & Solutions",
       text: "Find the AI opportunities worth pursuing, set a practical direction, and build solutions around real business needs.",
       href: "/ai-strategy-consulting/",
+    },
+    {
+      title: "Custom App Development",
+      text: "Design and build custom apps shaped to a real problem and the people who use them. My own app, Prayerfold, is in beta today.",
+      href: "/apps/",
     },
   ],
 };
@@ -353,3 +359,60 @@ export const services: Service[] = [
 export const footer = {
   tagline: "People. Processes. Technology. Data.",
 };
+
+/**
+ * Apps built by Vectrix. Prayerfold copy follows Dakota's approved
+ * "Prayerfold: summary for the Vectrix LLC website page" (Notion, 2026-11-14).
+ * Rules from that page: only what is live in the beta today, approved phrases
+ * where possible, no prices, no store links, no "private/secure" claims about
+ * storage, say "invite only", no daily-verse claim, no address.
+ */
+export const apps = {
+  title: "Apps by Vectrix | Prayerfold",
+  description:
+    "Apps built by Vectrix LLC. Prayerfold is a Christ-focused prayer app, now in a small private beta on Android.",
+  eyebrow: "Apps",
+  h1: "Apps I’ve built",
+  answer:
+    "Vectrix builds software as well as advising on it. When I talk about solutions built around real needs, this is what I mean: start with a real problem, then build the simplest thing that solves it.",
+};
+
+export const prayerfold = {
+  name: "Prayerfold",
+  tagline: "Every prayer in one place.",
+  status: "Private beta · Android",
+  description:
+    "Prayerfold is a Christ-focused prayer app. You write down what you’re praying for, mark each request as Open, Ongoing or Answered, and pray through your list each day. When God answers, you mark it, and you can look back later on His faithfulness. You can also share a request with a group, such as family, a small group or church, and see who’s praying with you.",
+  story: [
+    "Prayerfold started with the prayer board in our home. When I traveled, I couldn’t see it, and I missed the updates.",
+    "In many churches, we have the same problem. Prayer requests and updates get lost in a group chat, WhatsApp, or a similar messaging board. So I built one place to keep them, follow the updates, and see how God answered.",
+  ],
+  features: [
+    {
+      title: "Your prayers",
+      text: "Keep each request as Open, Ongoing or Answered, and add updates as things change. When God answers, mark it Yes, No or Not right now. All 3 count.",
+    },
+    {
+      title: "Daily prayer time",
+      text: "Pick a time and get a daily reminder. Each day you pray through your list with a verse and a reminder.",
+    },
+    {
+      title: "Groups",
+      text: "Share a prayer with your group and you can see who’s praying with you. Groups are invite only: people join with your code, and an admin lets them in. Members tap “I prayed” so you know, and talk it through in group chat.",
+    },
+    {
+      title: "Answered prayers",
+      text: "Answered prayers land here. Over time this becomes your record of God’s faithfulness.",
+    },
+  ],
+  promise: "No ads. Your prayers are never sold.",
+  join: "It’s a small private beta on Android right now. If you’d like to try it, message me your Google email.",
+  audience: "For individuals, families, small groups and churches. Ages 13 and up. Teens need a parent’s okay before joining a group.",
+  support: "support@prayerfold.app",
+  credit: "App developed by Vectrix LLC.",
+};
+
+export const PRAYERFOLD_MAIL = mailto(
+  "Prayerfold beta",
+  "I’d like to try the Prayerfold beta on Android.\n\nMy Google email:\n",
+);

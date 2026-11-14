@@ -1,0 +1,190 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Button from "../components/Button.astro";
+import SubpageHero from "../components/SubpageHero.astro";
+import Contact from "../components/Contact.astro";
+import { apps, prayerfold, PRAYERFOLD_MAIL } from "../content/site";
+import { webPage, breadcrumbs, ORG_ID, abs } from "../lib/schema";
+
+const path = "/apps/";
+const appNode = {
+  "@type": "SoftwareApplication",
+  "@id": `${abs(path)}#prayerfold`,
+  name: prayerfold.name,
+  description: prayerfold.description,
+  applicationCategory: "LifestyleApplication",
+  operatingSystem: "Android",
+  publisher: { "@id": ORG_ID },
+};
+const schema = [webPage(path, apps.title, apps.description), appNode, breadcrumbs(path, "Apps")];
+---
+<Base title={apps.title} description={apps.description} schema={schema}>
+  <Header />
+  <main id="main" tabindex="-1">
+    <SubpageHero eyebrow={apps.eyebrow} title={apps.h1} answer={apps.answer} crumb="Apps" />
+
+    <section class="section app" id="prayerfold" aria-labelledby="prayerfold-title">
+      <div class="container app__grid">
+        <div class="app__head">
+          <p class="label">{prayerfold.status}</p>
+          <h2 id="prayerfold-title" class="app__name">{prayerfold.name}</h2>
+          <p class="app__tagline">{prayerfold.tagline}</p>
+        </div>
+        <div class="app__body">
+          <p class="app__lead">{prayerfold.description}</p>
+          <div class="app__story">
+            <h3>Why I built it</h3>
+            {prayerfold.story.map((p) => <p>{p}</p>)}
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <h3 class="app__subhead">What it does today</h3>
+        <ul class="app__features">
+          {prayerfold.features.map((f) => (
+            <li>
+              <h4>{f.title}</h4>
+              <p>{f.text}</p>
+            </li>
+          ))}
+        </ul>
+        <p class="app__promise">{prayerfold.promise}</p>
+      </div>
+    </section>
+
+    <section class="section on-dark app-join" aria-labelledby="join-title">
+      <div class="container app-join__inner">
+        <div>
+          <p class="label">Join the beta</p>
+          <h2 id="join-title">Try Prayerfold.</h2>
+        </div>
+        <div class="app-join__body">
+          <p>{prayerfold.join}</p>
+          <div class="app-join__cta">
+            <Button href={PRAYERFOLD_MAIL} tone="dark">Message me your Google email</Button>
+          </div>
+          <p class="app-join__meta">{prayerfold.audience}</p>
+          <p class="app-join__meta">
+            Questions or problems: <a href={`mailto:${prayerfold.support}`}>{prayerfold.support}</a>
+          </p>
+          <p class="app-join__meta">{prayerfold.credit}</p>
+        </div>
+      </div>
+    </section>
+
+    <Contact />
+  </main>
+  <Footer />
+  <script>
+    import "../scripts/main";
+  </script>
+</Base>
+
+<style>
+  .app__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 40px clamp(32px, 6vw, 96px);
+    align-items: start;
+  }
+  .app__head {
+    display: grid;
+    gap: 16px;
+  }
+  .app__name {
+    font-size: var(--step-h2);
+  }
+  .app__tagline {
+    font-family: var(--font-display);
+    font-size: var(--step-h3);
+    font-weight: 600;
+    color: var(--copper-ink);
+  }
+  .app__lead {
+    font-size: var(--step-body);
+    max-width: 62ch;
+    padding-top: 24px;
+    border-top: 1px solid var(--charcoal);
+  }
+  .app__story {
+    display: grid;
+    gap: 12px;
+    margin-top: 32px;
+    max-width: 62ch;
+  }
+  .app__story h3,
+  .app__subhead {
+    font-size: var(--step-h3);
+  }
+  .app__subhead {
+    margin-top: clamp(56px, 8vw, 96px);
+  }
+  .app__features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(32px, 5vw, 72px);
+    margin-top: 24px;
+    border-top: 1px solid var(--charcoal);
+  }
+  .app__features li {
+    padding: 24px 0 28px;
+    border-bottom: 1px solid var(--line-light);
+  }
+  .app__features h4 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--charcoal);
+  }
+  .app__features p {
+    margin-top: 8px;
+    max-width: 56ch;
+  }
+  .app__promise {
+    margin-top: 32px;
+    padding-left: 18px;
+    border-left: 2px solid var(--copper);
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+  .app-join__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 32px clamp(32px, 6vw, 96px);
+    align-items: start;
+  }
+  .app-join h2 {
+    margin-top: 24px;
+    font-size: var(--step-h2);
+  }
+  .app-join__body {
+    display: grid;
+    gap: 16px;
+    max-width: 60ch;
+  }
+  .app-join__cta {
+    margin-block: 8px 16px;
+  }
+  .app-join__meta {
+    font-size: var(--step-small);
+    color: rgba(245, 242, 235, 0.72);
+  }
+  .app-join__meta a {
+    color: var(--ivory);
+    text-underline-offset: 4px;
+  }
+  @media (max-width: 960px) {
+    .app__grid,
+    .app-join__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .app__features {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

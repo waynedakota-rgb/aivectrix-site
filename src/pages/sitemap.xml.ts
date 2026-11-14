@@ -3,7 +3,7 @@ import { SITE_URL, services } from "../content/site";
 
 // Generated at build time so new pages appear without a plugin. No <lastmod>:
 // a build date on every page would be wrong, and Google ignores unreliable lastmod.
-const paths = ["/", ...services.map((s) => `/${s.slug}/`), "/about/"];
+const paths = ["/", ...services.map((s) => `/${s.slug}/`), "/about/", "/apps/"];
 
 export const GET: APIRoute = () => {
   const urls = paths
