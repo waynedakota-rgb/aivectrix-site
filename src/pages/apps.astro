@@ -5,19 +5,20 @@ import Footer from "../components/Footer.astro";
 import Button from "../components/Button.astro";
 import SubpageHero from "../components/SubpageHero.astro";
 import Contact from "../components/Contact.astro";
-import { apps, prayerfold, PRAYERFOLD_MAIL, mailto } from "../content/site";
+import { apps, appList, mailto } from "../content/site";
 import { webPage, breadcrumbs, ORG_ID, abs } from "../lib/schema";
 
 const path = "/apps/";
-const appNode = {
+const categories: Record<string, string> = { prayerfold: "LifestyleApplication", nibbs: "EducationalApplication" };
+const appNodes = appList.map((a) => ({
   "@type": "SoftwareApplication",
-  "@id": `${abs(path)}#prayerfold`,
-  name: prayerfold.name,
-  description: prayerfold.description,
-  applicationCategory: "LifestyleApplication",
+  "@id": `${abs(path)}#${a.id}`,
+  name: a.name,
+  description: a.description,
+  applicationCategory: categories[a.id],
   operatingSystem: "Android",
   publisher: { "@id": ORG_ID },
-};
+}));
 const service = {
   "@type": "Service",
   "@id": `${abs(path)}#service`,
@@ -25,7 +26,7 @@ const service = {
   description: apps.answer,
   provider: { "@id": ORG_ID },
 };
-const schema = [webPage(path, apps.title, apps.description), service, appNode, breadcrumbs(path, "Apps")];
+const schema = [webPage(path, apps.title, apps.description), service, ...appNodes, breadcrumbs(path, "Apps")];
 ---
 <Base title={apps.title} description={apps.description} schema={schema}>
   <Header />
@@ -56,55 +57,47 @@ const schema = [webPage(path, apps.title, apps.description), service, appNode, b
       </div>
     </section>
 
-    <section class="section app" id="prayerfold" aria-labelledby="prayerfold-title">
-      <div class="container app__grid">
-        <div class="app__head">
-          <p class="label">My own app · {prayerfold.status}</p>
-          <h2 id="prayerfold-title" class="app__name">{prayerfold.name}</h2>
-          <p class="app__tagline">{prayerfold.tagline}</p>
-        </div>
-        <div class="app__body">
-          <p class="app__lead">{prayerfold.description}</p>
-          <div class="app__story">
-            <h3>Why I built it</h3>
-            {prayerfold.story.map((p) => <p>{p}</p>)}
+    {appList.map((a, n) => (
+      <section class={`section app ${n % 2 ? "app--alt" : ""}`} id={a.id} aria-labelledby={`${a.id}-title`}>
+        <div class="container app__grid">
+          <div class="app__head">
+            <img class="app__icon" src={a.icon} alt="" width="72" height="72" loading="lazy" decoding="async" />
+            <p class="label">{a.status}</p>
+            <h2 id={`${a.id}-title`} class="app__name">{a.name}</h2>
+            <p class="app__tagline">{a.tagline}</p>
+          </div>
+          <div class="app__body">
+            <p class="app__lead">{a.description}</p>
+            {a.story && (
+              <div class="app__story">
+                <h3>Why I built it</h3>
+                {a.story.map((p) => <p>{p}</p>)}
+              </div>
+            )}
           </div>
         </div>
-      </div>
 
-      <div class="container">
-        <h3 class="app__subhead">What it does today</h3>
-        <ul class="app__features">
-          {prayerfold.features.map((f) => (
-            <li>
-              <h4>{f.title}</h4>
-              <p>{f.text}</p>
-            </li>
-          ))}
-        </ul>
-        <p class="app__promise">{prayerfold.promise}</p>
-      </div>
-    </section>
-
-    <section class="section on-dark app-join" aria-labelledby="join-title">
-      <div class="container app-join__inner">
-        <div>
-          <p class="label">Join the beta</p>
-          <h2 id="join-title">Try Prayerfold.</h2>
+        <div class="container">
+          <ul class="app__shots" aria-label={`${a.name} screens, sample data`}>
+            {a.shots.map((sh) => (
+              <li><img src={sh.src} alt={sh.alt} width={sh.w} height={sh.h} loading="lazy" decoding="async" /></li>
+            ))}
+          </ul>
+          <p class="app__shots-note">Screens show made-up sample data.</p>
+          <h3 class="app__subhead">What it does today</h3>
+          <ul class="app__features">
+            {a.features.map((f) => (
+              <li>
+                <h4>{f.title}</h4>
+                <p>{f.text}</p>
+              </li>
+            ))}
+          </ul>
+          {a.note && <p class="app__promise">{a.note}</p>}
+          <p class="app__credit">App developed by Vectrix LLC.</p>
         </div>
-        <div class="app-join__body">
-          <p>{prayerfold.join}</p>
-          <div class="app-join__cta">
-            <Button href={PRAYERFOLD_MAIL} tone="dark">Message me your Google email</Button>
-          </div>
-          <p class="app-join__meta">{prayerfold.audience}</p>
-          <p class="app-join__meta">
-            Questions or problems: <a href={`mailto:${prayerfold.support}`}>{prayerfold.support}</a>
-          </p>
-          <p class="app-join__meta">{prayerfold.credit}</p>
-        </div>
-      </div>
-    </section>
+      </section>
+    ))}
 
     <Contact />
   </main>
@@ -213,37 +206,36 @@ const schema = [webPage(path, apps.title, apps.description), service, appNode, b
     font-weight: 600;
     color: var(--charcoal);
   }
-  .app-join__inner {
+  .app--alt {
+    background: var(--ivory-deep);
+  }
+  .app__icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(21, 24, 25, 0.12);
+  }
+  .app__shots {
     display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 32px clamp(32px, 6vw, 96px);
-    align-items: start;
+    grid-template-columns: repeat(3, minmax(0, 220px));
+    gap: clamp(16px, 3vw, 32px);
+    margin-top: clamp(48px, 7vw, 80px);
   }
-  .app-join h2 {
-    margin-top: 24px;
-    font-size: var(--step-h2);
+  .app__shots img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 1px solid var(--line-light);
+    background: var(--white);
   }
-  .app-join__body {
-    display: grid;
-    gap: 16px;
-    max-width: 60ch;
-  }
-  .app-join__cta {
-    margin-block: 8px 16px;
-  }
-  .app-join__meta {
+  .app__shots-note,
+  .app__credit {
+    margin-top: 12px;
     font-size: var(--step-small);
-    color: rgba(245, 242, 235, 0.72);
+    color: var(--text-2);
   }
-  .app-join__meta a {
-    color: var(--ivory);
-    text-underline-offset: 4px;
-  }
-  @media (max-width: 960px) {
-    .app__grid,
-    .app-join__inner {
-      grid-template-columns: minmax(0, 1fr);
-    }
+  .app__credit {
+    margin-top: 24px;
   }
   @media (max-width: 480px) {
     .app-how__list li {
