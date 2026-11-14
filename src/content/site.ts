@@ -55,7 +55,7 @@ export const CF_ANALYTICS_TOKEN: string | null = "a8ae1d193e3845cab75981d1de9bd4
 export const seo = {
   title: "Vectrix | Business Consulting for Leaders Driving Change",
   description:
-    "Consulting for business owners, entrepreneurs, and leaders across North America: strategy and execution, operational excellence, leadership development, and practical AI.",
+    "Consulting for business owners, entrepreneurs, and leaders across North America: strategy and execution, operational excellence, leadership development, practical AI, and custom app development.",
   ogImage: "/og-image.png",
   ogImageAlt:
     "Vectrix logo on deep charcoal with the line: Complex challenges. Meaningful results.",
@@ -66,6 +66,7 @@ export const nav = {
     { href: "/#approach", label: "Approach" },
     { href: "/#capabilities", label: "Services" },
     { href: "/#experience", label: "Experience" },
+    { href: "/apps/", label: "Apps" },
     { href: "/about/", label: "About" },
   ],
   cta: "Tell me your challenge",
@@ -74,7 +75,7 @@ export const nav = {
 export const hero = {
   eyebrow: "Business consulting across North America",
   headline: ["Consulting for leaders", "making change stick."],
-  body: "I work with business owners, entrepreneurs, and leaders to fix how work gets done, build people who own the results, and put AI to work where it solves a real problem.",
+  body: "I work with business owners, entrepreneurs, and leaders to fix how work gets done, build people who own the results, put AI to work where it solves a real problem, and build custom apps when off-the-shelf tools don’t fit.",
   cta: "Tell me your biggest challenge",
   secondary: { href: "/#capabilities", label: "See how I help" },
   proof: [
@@ -136,6 +137,11 @@ export const capabilities = {
       title: "AI Strategy & Solutions",
       text: "Find the AI opportunities worth pursuing, set a practical direction, and build solutions around real business needs.",
       href: "/ai-strategy-consulting/",
+    },
+    {
+      title: "Custom App Development",
+      text: "Design and build custom mobile and web apps around how your people actually work, from a written spec to testing with real users. See Prayerfold and Nibbs, 2 apps I’ve built.",
+      href: "/apps/",
     },
   ],
 };
@@ -353,3 +359,130 @@ export const services: Service[] = [
 export const footer = {
   tagline: "People. Processes. Technology. Data.",
 };
+
+/**
+ * Apps built by Vectrix. Prayerfold copy follows Dakota's approved
+ * "Prayerfold: summary for the Vectrix LLC website page" (Notion, 2026-11-14).
+ * Rules from that page: only what is live in the beta today, approved phrases
+ * where possible, no prices, no store links, no "private/secure" claims about
+ * storage, say "invite only", no daily-verse claim, no address.
+ */
+export const apps = {
+  title: "Custom App Development for Business Leaders | Vectrix",
+  description:
+    "Custom mobile and web app development by Vectrix for business owners and leaders in North America. Spec first, built for real use, tested with real users. See Prayerfold and Nibbs.",
+  eyebrow: "Custom app development",
+  h1: "Custom app development",
+  answer:
+    "I design and build custom mobile and web apps for business owners and leaders who need a tool that fits how their people actually work. Every build starts the way my consulting does: understand the work first, then build the simplest thing that solves the real problem.",
+  how: [
+    {
+      title: "Spec before code",
+      text: "Every screen, flow and decision gets written down and agreed before any code. Prayerfold’s spec covers 44 screens and 22 flows, plus a list of what’s out of scope so it stays out.",
+    },
+    {
+      title: "Built for real use",
+      text: "Sign-in, offline use with sync, reminders, groups with roles and admin approval: the parts that decide whether people keep using an app after the first week.",
+    },
+    {
+      title: "Privacy and safety planned on paper",
+      text: "Who can see what, how reports get handled, and what the app collects are decided before launch, not patched in after.",
+    },
+    {
+      title: "Tested with real people",
+      text: "Neither app goes to the public stores until real people have used it. Prayerfold is in a private beta now, and Nibbs is in testing on Android.",
+    },
+  ],
+  mail: "Custom app conversation",
+};
+
+export type AppShot = { src: string; alt: string; w: number; h: number };
+export type AppEntry = {
+  id: string;
+  name: string;
+  tagline: string;
+  status: string;
+  icon: string;
+  description: string;
+  story?: string[];
+  features: { title: string; text: string }[];
+  note?: string;
+  shots: AppShot[];
+};
+
+/**
+ * Nibbs copy comes from the approved store listing (nibbs-app docs/store/listing.md,
+ * Notion "Store listings"). Rules from Dakota: no Premium, no "best", no claim that it
+ * syncs between devices, no "we never sell your data", don't name past employers.
+ */
+export const appList: AppEntry[] = [
+  {
+    id: "prayerfold",
+    name: "Prayerfold",
+    tagline: "Every prayer in one place.",
+    status: "Private beta on Android",
+    icon: "/images/apps/prayerfold-icon.webp",
+    description:
+      "Prayerfold is a Christ-focused prayer app. You write down what you’re praying for, mark each request as Open, Ongoing or Answered, and pray through your list each day. When God answers, you mark it, and you can look back later on His faithfulness. You can also share a request with a group, such as family, a small group or church, and see who’s praying with you.",
+    story: [
+      "Prayerfold started with the prayer board in our home. When I traveled, I couldn’t see it, and I missed the updates.",
+      "In many churches, we have the same problem. Prayer requests and updates get lost in a group chat, WhatsApp, or a similar messaging board. So I built one place to keep them, follow the updates, and see how God answered.",
+    ],
+    features: [
+      {
+        title: "Your prayers",
+        text: "Keep each request as Open, Ongoing or Answered, and add updates as things change. When God answers, mark it Yes, No or Not right now. All 3 count.",
+      },
+      {
+        title: "Daily prayer time",
+        text: "Pick a time and get a daily reminder. Each day you pray through your list with a verse and a reminder.",
+      },
+      {
+        title: "Groups",
+        text: "Share a prayer with your group and you can see who’s praying with you. Groups are invite only: people join with your code, and an admin lets them in.",
+      },
+      {
+        title: "Answered prayers",
+        text: "Answered prayers land here. Over time this becomes your record of God’s faithfulness.",
+      },
+    ],
+    note: "No ads. Your prayers are never sold.",
+    shots: [
+      { src: "/images/apps/prayerfold-prayer-time.webp", alt: "Prayerfold prayer time screen listing today’s prayers with sample requests", w: 480, h: 1038 },
+      { src: "/images/apps/prayerfold-faithfulness.webp", alt: "Prayerfold Faithfulness screen collecting answered prayers by month, with sample data", w: 480, h: 1038 },
+      { src: "/images/apps/prayerfold-group-prayer.webp", alt: "A shared group prayer request in Prayerfold with updates and an I prayed button, with sample data", w: 480, h: 1038 },
+    ],
+  },
+  {
+    id: "nibbs",
+    name: "Nibbs",
+    tagline: "One bite at a time.",
+    status: "In testing on Android",
+    icon: "/images/apps/nibbs-icon.webp",
+    description:
+      "Nibbs is a homework planner for high school and college students. It asks 3 things about every assignment: how much it counts toward your grade, how long it’ll take, and when it’s due. Then it ranks the work and plans it into the hours you’re free, in short bites.",
+    features: [
+      {
+        title: "Every task ranked",
+        text: "Each task shows its number and a plain reason, like “High impact, due Thu” or “Quick win: 30 min, medium impact”.",
+      },
+      {
+        title: "A plan built around free time",
+        text: "Tell Nibbs when you can do homework. It fills those hours in rank order, splits long assignments into bites across days, and builds in breaks.",
+      },
+      {
+        title: "Warned before a deadline slips",
+        text: "If something won’t fit before it’s due, Nibbs says so right away: which task, and how short you are. It never drops work quietly.",
+      },
+      {
+        title: "Work in bites",
+        text: "A timer for the bite in front of you, and a re-plan from now if one gets missed.",
+      },
+    ],
+    shots: [
+      { src: "/images/apps/nibbs-plan.webp", alt: "Nibbs store screenshot: every task ranked, every rank explained, with sample homework", w: 480, h: 853 },
+      { src: "/images/apps/nibbs-week.webp", alt: "Nibbs store screenshot: a week calendar built around free time, with sample homework", w: 480, h: 853 },
+      { src: "/images/apps/nibbs-timer.webp", alt: "Nibbs store screenshot: a bite timer with breaks built in, with sample homework", w: 480, h: 853 },
+    ],
+  },
+];

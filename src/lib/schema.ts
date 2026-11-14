@@ -8,7 +8,7 @@ export const ORG_ID = `${SITE_URL}#organization`;
 export const PERSON_ID = `${SITE_URL}#dakota-wayne`;
 export const WEBSITE_ID = `${SITE_URL}#website`;
 
-const abs = (path: string) => new URL(path, SITE_URL).href;
+export const abs = (path: string) => new URL(path, SITE_URL).href;
 
 export function baseGraph() {
   return [

@@ -1,0 +1,251 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Button from "../components/Button.astro";
+import SubpageHero from "../components/SubpageHero.astro";
+import Contact from "../components/Contact.astro";
+import { apps, appList, mailto } from "../content/site";
+import { webPage, breadcrumbs, ORG_ID, abs } from "../lib/schema";
+
+const path = "/apps/";
+const categories: Record<string, string> = { prayerfold: "LifestyleApplication", nibbs: "EducationalApplication" };
+const appNodes = appList.map((a) => ({
+  "@type": "SoftwareApplication",
+  "@id": `${abs(path)}#${a.id}`,
+  name: a.name,
+  description: a.description,
+  applicationCategory: categories[a.id],
+  operatingSystem: "Android",
+  publisher: { "@id": ORG_ID },
+}));
+const service = {
+  "@type": "Service",
+  "@id": `${abs(path)}#service`,
+  name: "Custom app development",
+  description: apps.answer,
+  provider: { "@id": ORG_ID },
+};
+const schema = [webPage(path, apps.title, apps.description), service, ...appNodes, breadcrumbs(path, "Apps")];
+---
+<Base title={apps.title} description={apps.description} schema={schema}>
+  <Header />
+  <main id="main" tabindex="-1">
+    <SubpageHero eyebrow={apps.eyebrow} title={apps.h1} answer={apps.answer} crumb="Apps">
+      <div class="app-cta">
+        <Button href={mailto(apps.mail)} tone="dark">Tell me what you need built</Button>
+      </div>
+    </SubpageHero>
+
+    <section class="section app-how" aria-labelledby="how-title">
+      <div class="container app__grid">
+        <div class="app__head">
+          <p class="label">How I build</p>
+          <h2 id="how-title" class="app__name">The same discipline, applied to software.</h2>
+        </div>
+        <ol class="app-how__list">
+          {apps.how.map((h, i) => (
+            <li>
+              <span class="app-how__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{h.title}</h3>
+                <p>{h.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {appList.map((a, n) => (
+      <section class={`section app ${n % 2 ? "app--alt" : ""}`} id={a.id} aria-labelledby={`${a.id}-title`}>
+        <div class="container app__grid">
+          <div class="app__head">
+            <img class="app__icon" src={a.icon} alt="" width="72" height="72" loading="lazy" decoding="async" />
+            <p class="label">{a.status}</p>
+            <h2 id={`${a.id}-title`} class="app__name">{a.name}</h2>
+            <p class="app__tagline">{a.tagline}</p>
+          </div>
+          <div class="app__body">
+            <p class="app__lead">{a.description}</p>
+            {a.story && (
+              <div class="app__story">
+                <h3>Why I built it</h3>
+                {a.story.map((p) => <p>{p}</p>)}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div class="container">
+          <ul class="app__shots" aria-label={`${a.name} screens, sample data`}>
+            {a.shots.map((sh) => (
+              <li><img src={sh.src} alt={sh.alt} width={sh.w} height={sh.h} loading="lazy" decoding="async" /></li>
+            ))}
+          </ul>
+          <p class="app__shots-note">Screens show made-up sample data.</p>
+          <h3 class="app__subhead">What it does today</h3>
+          <ul class="app__features">
+            {a.features.map((f) => (
+              <li>
+                <h4>{f.title}</h4>
+                <p>{f.text}</p>
+              </li>
+            ))}
+          </ul>
+          {a.note && <p class="app__promise">{a.note}</p>}
+          <p class="app__credit">App developed by Vectrix LLC.</p>
+        </div>
+      </section>
+    ))}
+
+    <Contact />
+  </main>
+  <Footer />
+  <script>
+    import "../scripts/main";
+  </script>
+</Base>
+
+<style>
+  .app-cta {
+    margin-top: 40px;
+  }
+  .app-how {
+    background: var(--ivory-deep);
+  }
+  .app-how__list {
+    border-top: 1px solid var(--charcoal);
+  }
+  .app-how__list li {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 16px;
+    padding: 28px 0 30px;
+    border-bottom: 1px solid var(--line-light);
+  }
+  .app-how__num {
+    padding-top: 4px;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--copper-ink);
+  }
+  .app-how__list h3 {
+    font-size: var(--step-h3);
+    line-height: 1.2;
+  }
+  .app-how__list p {
+    margin-top: 10px;
+    max-width: 58ch;
+  }
+  .app__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 40px clamp(32px, 6vw, 96px);
+    align-items: start;
+  }
+  .app__head {
+    display: grid;
+    gap: 16px;
+  }
+  .app__name {
+    font-size: var(--step-h2);
+  }
+  .app__tagline {
+    font-family: var(--font-display);
+    font-size: var(--step-h3);
+    font-weight: 600;
+    color: var(--copper-ink);
+  }
+  .app__lead {
+    font-size: var(--step-body);
+    max-width: 62ch;
+    padding-top: 24px;
+    border-top: 1px solid var(--charcoal);
+  }
+  .app__story {
+    display: grid;
+    gap: 12px;
+    margin-top: 32px;
+    max-width: 62ch;
+  }
+  .app__story h3,
+  .app__subhead {
+    font-size: var(--step-h3);
+  }
+  .app__subhead {
+    margin-top: clamp(56px, 8vw, 96px);
+  }
+  .app__features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(32px, 5vw, 72px);
+    margin-top: 24px;
+    border-top: 1px solid var(--charcoal);
+  }
+  .app__features li {
+    padding: 24px 0 28px;
+    border-bottom: 1px solid var(--line-light);
+  }
+  .app__features h4 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--charcoal);
+  }
+  .app__features p {
+    margin-top: 8px;
+    max-width: 56ch;
+  }
+  .app__promise {
+    margin-top: 32px;
+    padding-left: 18px;
+    border-left: 2px solid var(--copper);
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+  .app--alt {
+    background: var(--ivory-deep);
+  }
+  .app__icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(21, 24, 25, 0.12);
+  }
+  .app__shots {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 220px));
+    gap: clamp(16px, 3vw, 32px);
+    margin-top: clamp(48px, 7vw, 80px);
+  }
+  .app__shots img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 1px solid var(--line-light);
+    background: var(--white);
+  }
+  .app__shots-note,
+  .app__credit {
+    margin-top: 12px;
+    font-size: var(--step-small);
+    color: var(--text-2);
+  }
+  .app__credit {
+    margin-top: 24px;
+  }
+  @media (max-width: 480px) {
+    .app-how__list li {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+    }
+  }
+  @media (max-width: 640px) {
+    .app__features {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
