@@ -2,7 +2,7 @@
  * JSON-LD helpers. Only confirmed facts: no address, phone, prices, reviews,
  * or client names. See the factual boundaries in src/content/site.ts.
  */
-import { SITE_URL, EMAIL, LINKEDIN, DEFINITION, AREA_SERVED, founder, services } from "../content/site";
+import { SITE_URL, EMAIL, LINKEDIN, LINKEDIN_COMPANY, DEFINITION, AREA_SERVED, founder, services } from "../content/site";
 
 export const ORG_ID = `${SITE_URL}#organization`;
 export const PERSON_ID = `${SITE_URL}#dakota-wayne`;
@@ -22,6 +22,7 @@ export function baseGraph() {
       logo: abs("/brand/aivectrix-symbol-dark.svg"),
       description: DEFINITION,
       founder: { "@id": PERSON_ID },
+      sameAs: [LINKEDIN_COMPANY],
       areaServed: { "@type": "Place", name: AREA_SERVED },
       knowsAbout: founder.knowsAbout,
       makesOffer: services.map((s) => ({

@@ -20,6 +20,7 @@
 
 export const EMAIL = "customerservice@aivectrix.com";
 export const LINKEDIN = "https://www.linkedin.com/in/dakota-wayne-183944b5/";
+export const LINKEDIN_COMPANY = "https://www.linkedin.com/company/vectrixllc/";
 export const SITE_URL = "https://aivectrix.com/";
 
 /** Builds a properly encoded mailto link. */
