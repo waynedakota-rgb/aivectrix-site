@@ -390,7 +390,7 @@ export const apps = {
     },
     {
       title: "Tested with real people",
-      text: "Neither app goes to the public stores until real people have used it. Prayerfold is in a private beta now, and Nibbs is in testing on Android.",
+      text: "Every app is tested by real people before it goes public. Nibbs is on Google Play, and Prayerfold is in a private beta.",
     },
   ],
   mail: "Custom app conversation",
@@ -457,7 +457,7 @@ export const appList: AppEntry[] = [
     id: "nibbs",
     name: "Nibbs",
     tagline: "One bite at a time.",
-    status: "In testing on Android",
+    status: "On Google Play",
     icon: "/images/apps/nibbs-icon.webp",
     description:
       "Nibbs is a homework planner for high school and college students. It asks 3 things about every assignment: how much it counts toward your grade, how long it’ll take, and when it’s due. Then it ranks the work and plans it into the hours you’re free, in short bites.",
