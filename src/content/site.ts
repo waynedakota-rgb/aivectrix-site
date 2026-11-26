@@ -472,7 +472,7 @@ export const appList: AppEntry[] = [
       },
       {
         title: "Warned before a deadline slips",
-        text: "If something won’t fit before it’s due, Nibbs says so right away: which task, and how short you are. It never drops work quietly.",
+        text: "If something won’t fit before it’s due, Nibbs says so right away: which task, and how short you are. It doesn't drop work quietly.",
       },
       {
         title: "Work in bites",
